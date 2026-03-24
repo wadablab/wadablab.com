@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+
+:root{
+    --cream:#f7f1f3;
+    --gray:#144f56;
+    --red:#e63946;
+    --black:#000000;
+    --font-size-base: 1rem;
+}
+
+body{
+    font-family: "Lexend",sans-serif;
+    color: var(--cream);
+    font-size: var(--font-size-base);
+    background-color: var(--gray);
+    margin: 0;
+}
+
+a {
+    color: var(--cream);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+select,
+textarea{
+    width: 100%;
+    font-family:"Lexend",sans-serif;
+    font-size: var(--font-size-base);
+    display: block;
+    box-sizing: border-box;
+    padding: 0.7rem 0.75rem;
+    margin-bottom: 0rem;
+}
+
+.btn {
+    background-color: black;
+    border: none;
+    color: var(--cream);
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn-delete{
+    padding: 16px 32px;
+    background-color: red;
+}
+
+/*///////////////////////////////////////////////// Layout */
+
+.container{
+    max-width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.main{
+    padding: 0px 2rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+}
+
+.header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: sticky;
+    top:0px;
+    height: auto;
+    width: 100%;
+    background-color: var(--red);
+    grid-template-areas: "menu button";
+    
+
+}
+
+.header__logo{
+    display: flex;
+    justify-content: center;
+    background: var(--red);
+}
+
+.header__nav{
+    grid-area: menu; 
+    float: left;
+    list-style-type: none;
+    
+}
+
+.header__nav ul{
+    list-style-type: none;
+    display: flex;
+    color: var(--cream);
+    margin: 0;
+    padding: 15px 0px;
+
+    
+}
+
+.header__nav ul li{
+    color: var(--cream);
+}
+
+.header__nav ul li a{
+    padding:15px;
+    text-decoration: none;
+}
+
+.header__nav ul a:hover{
+    background:var(--cream);
+    color: var(--black);
+}
+
+.header__button{
+    align-content: center;
+    padding: 0rem 15px;
+}
+
+.searchBtn{
+    float: right;
+    font-family: Lexend,sans-serif;
+    padding:.2rem 2rem;
+    border-radius: 10px;
+    border: solid 2px;
+    border-color: transparent;
+    background: var(--cream);  
+}
+
+.searchBtn:hover{
+    border: solid 2px;
+}
+
+
+
+.searchBar{
+    visibility: hidden;
+    transform: translateY(-3rem);
+    background: var(--black);
+    display:block;
+    position: absolute;
+    left: 0;
+    right : 0;
+}
+
+.search__form{
+    float:left;
+    padding:0 5rem;
+}
+
+#searchClose{
+    float: right;
+    padding-top: 10px;
+    padding-right:20px;
+    
+}
+
+
+
+
+
+
+.footer{
+    background-color:var(--red);
+    align-content: flex-end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
