@@ -78,14 +78,18 @@ textarea{
     width: 100%;
     background-color: var(--red);
     grid-template-areas: "menu button";
-    
 
 }
 
 .header__logo{
     display: flex;
     justify-content: center;
+    text-decoration: none;
     background: var(--red);
+}
+
+.header__logo a{
+    text-decoration: none;
 }
 
 .header__nav{
@@ -124,9 +128,9 @@ textarea{
     padding: 0rem 15px;
 }
 
-.searchBtn{
+.header__button button{
     float: right;
-    font-family: Lexend,sans-serif;
+    
     padding:.2rem 2rem;
     border-radius: 10px;
     border: solid 2px;
@@ -134,7 +138,7 @@ textarea{
     background: var(--cream);  
 }
 
-.searchBtn:hover{
+.header__button button:hover{
     border: solid 2px;
 }
 
