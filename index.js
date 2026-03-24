@@ -10,8 +10,7 @@ const app = express();
 const PORT = 5000 || process.env.PORT;
 
 
-//connect to DB
-connectDB();
+
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -26,8 +25,10 @@ app.set('view engine','ejs');
 
 app.use('/',require('./server/routes/main'));
 
-connectDB().then(()=>{
+//connect to DB
+connectDB().then(() =>{
     app.listen(PORT, ()=>{
-        console.log(`App listening on port ${PORT}`)
+    console.log(`App listening on port ${PORT}`)
     });
 });
+
