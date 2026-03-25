@@ -11,24 +11,26 @@ const session = require("express-session");
 const connectDB = require('./server/config/db');
 
 const app = express();
-const PORT = 5000 || process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
-
- 
+//connect to DB
+connectDB();
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 
+
+
 app.use(session({
-    secret: 'nyan cat',
+    secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI
-    })
+    store: MongoStore.create({mongoUrl: process.env.MONGODB_URI}),
 }));
+
+
 
 app.use(express.static('public'));
 
@@ -41,10 +43,9 @@ app.set('view engine','ejs');
 app.use('/',require('./server/routes/main'));
 app.use('/',require('./server/routes/admin'));
 
-//connect to DB
-connectDB().then(() =>{
-    app.listen(PORT, ()=>{
-        console.log(`App listening on port ${PORT}`)
-    });
+
+app.listen(PORT, ()=>{
+    console.log(`App listening on port ${PORT}`)
 });
+
 
