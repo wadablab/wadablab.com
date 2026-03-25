@@ -5,7 +5,7 @@
 
     <% if (data.cover_path == "") { %>
         <%- data.body %>
-    <% } else {%>
+    <% }else{%>
         <img src="/uploads/<%= data.cover_path %>" height="200" alt="">
         <%- data.body %>
     <%}%>
