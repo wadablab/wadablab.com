@@ -159,11 +159,21 @@ router.post('/add-post',[authMiddleware,upload.single("cover")],async (req,res) 
         //     }
         // }
         try {
-            const newPost = new Post({
+            let newPost;
+            if(req.file !== undefined){
+                newPost = new Post({
                 title: req.body.title,
-                cover_path: ff.originalname,
+                cover_path: req.file.originalname,
                 body: req.body.body
-            })
+            })}else{
+                newPost = new Post({
+                title: req.body.title,
+                body: req.body.body
+            })}
+
+            
+            
+            console.log(req.file);
 
             await Post.create(newPost);
             res.redirect("/dashboard");

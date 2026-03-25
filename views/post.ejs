@@ -2,6 +2,13 @@
 
 <article class = "article">
     <h1><%= data.title %></h1>
-    <img src="/uploads/<%= data.cover_path %>" height="200" alt="">
-    <%= data.body %>
+
+    <% if (data.cover_path == "") { %>
+        <%- data.body %>
+    <% } else {%>
+        <img src="/uploads/<%= data.cover_path %>" height="200" alt="">
+        <%- data.body %>
+    <%}%>
+
+    
 </article>
