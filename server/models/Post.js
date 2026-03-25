@@ -10,6 +10,10 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
+    cover_path:{
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now

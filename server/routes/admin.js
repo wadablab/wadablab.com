@@ -4,10 +4,27 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const path = require("path");
 
 const adminLayout = '../views/layouts/admin';
 const jwtsecret = process.env.JWT_SECRET;
 
+/*move to middleware file */
+let ff;
+const storage = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, "./public/uploads");
+    },
+    filename: (req, file, cb)=>{
+        ff=file;
+        console.log(ff);
+        cb(null,ff.originalname);
+    }
+});
+
+
+const upload = multer({storage: storage});
 
 
 /*ADMIN CHECK LOGIN*/
@@ -132,12 +149,19 @@ router.get('/add-post',authMiddleware,async (req,res) =>{
 
 
 /*POST ADMIN CREATE NEW POST */
-router.post('/add-post',authMiddleware,async (req,res) =>{
+router.post('/add-post',[authMiddleware,upload.single("cover")],async (req,res) =>{
 
-    try {
+   // try {
+        // const fileExt = (ff.mimetype).split('/').pop();
+        // if (fileExt=="png" || fileExt=="jpg"|| fileExt=="jpeg"){
+        //     data={
+        //         path: ff.originalname
+        //     }
+        // }
         try {
             const newPost = new Post({
                 title: req.body.title,
+                cover_path: ff.originalname,
                 body: req.body.body
             })
 
@@ -146,9 +170,9 @@ router.post('/add-post',authMiddleware,async (req,res) =>{
         } catch (error) {
             console.log(error);
         }
-    } catch (error) {
-        console.log(error);
-    }
+  //  } catch (error) {
+   //     console.log(error);
+   // }
 
 });
 
@@ -187,7 +211,7 @@ router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
             updatedAt: Date.now()
         });
 
-        res.redirect(`/edit-post/${req.params.id}`);
+        res.redirect("/dashboard");;
     } catch (error) {
         console.log(error);
     }
