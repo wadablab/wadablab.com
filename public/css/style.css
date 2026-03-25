@@ -39,6 +39,7 @@ textarea{
 
 .btn {
     border: none;
+    font-family: "Lexend",sans-serif;
     color: var(--cream);
     text-decoration: none;
     margin: 4px 2px;
@@ -119,6 +120,7 @@ textarea{
 .header__nav ul a:hover{
     background:var(--cream);
     color: var(--black);
+    transition: 0.3s;
 }
 
 .header__button{
@@ -128,7 +130,7 @@ textarea{
 
 .header__button button{
     float: right;
-    
+    font-family: "Lexend",sans-serif;
     padding:.2rem 2rem;
     border-radius: 10px;
     border: solid 2px;
@@ -138,6 +140,7 @@ textarea{
 
 .header__button button:hover{
     border: solid 2px;
+    transition: 0.3s;
 }
 
 
@@ -145,7 +148,7 @@ textarea{
 .searchBar{
     visibility: hidden;
     transform: translateY(-3rem);
-    
+    transition: 0.1s;
     position:absolute;
     left: 0;
     right: 0;
