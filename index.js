@@ -44,7 +44,7 @@ app.use('/',require('./server/routes/admin'));
 //connect to DB
 connectDB().then(() =>{
     app.listen(PORT, ()=>{
-    console.log(`App listening on port ${PORT}`)
+        console.log(`App listening on port ${PORT}`)
     });
 });
 
