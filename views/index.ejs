@@ -1,18 +1,22 @@
 <h1>HELLO</h1>
 
-<section class="article">
-    <h2 class="article__heading">Latest Posts :</h2>
-    <ul class = "article-ul">
+<section class="articles">
+    <h2 class="articles__heading">Latest Posts :</h2>
+    <ul class = "article__ul">
         <% data.forEach(post => { %>
-            <li>
-                <a href="/post/<%= post._id %>">
-                    <span><%= post.title %></span>
-                    <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
+            <li >
+                <a class = "post" href="/post/<%= post._id %>">
                     <% if (post.cover_path !== "") { %>
-                        <img src="/uploads/<%= post.cover_path  %>" height = 200 alt="">
+                        <img class="article__img"src="/uploads/<%= post.cover_path  %>"alt="">
+                    <% } else {%>
+                         <img class="article__img"src="/uploads/no_image.png"alt="">
+
                     <% } %>
+                    <span class="article-list__title"><%= post.title %></span>
+                    <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
                 </a>  
-            </li>  
+                    
+            </li>
         <% }) %>
     </ul>
 
