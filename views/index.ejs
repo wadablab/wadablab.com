@@ -2,10 +2,12 @@
 
 <section class="articles">
     <h2 class="articles__heading">Latest Posts :</h2>
-    <ul class = "article__ul">
+    <ul class = "article__ul">e
         <% data.forEach(post => { %>
-            <li >
-                <a class = "post" href="/post/<%= post._id %>">
+            <li >e
+                <a class = "post" href="/post/<%= post._id %>"><em></em><% array.forEach(element => { %>
+                 
+                <% }) %>
                     <% if (post.cover_path !== "") { %>
                         <img class="article__img"src="/uploads/<%= post.cover_path  %>"alt="">
                     <% } else {%>
@@ -19,7 +21,7 @@
             </li>
         <% }) %>
     </ul>
-
+e
     <% if (nextPage !== null) { %>
         <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
     <% } %>
