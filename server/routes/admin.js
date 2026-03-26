@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
 });
 
 
-const upload = multer({storage: storage}).single('cover');
+const upload_cover = multer({storage: storage}).single('cover');
 
 
 /*ADMIN CHECK LOGIN*/
@@ -141,7 +141,6 @@ router.get('/dashboard',authMiddleware,async (req,res) =>{
 
 });
 
-
 /*GET ADMIN CREATE NEW POST */
 router.get('/add-post',authMiddleware,async (req,res) =>{
 
@@ -165,9 +164,32 @@ router.get('/add-post',authMiddleware,async (req,res) =>{
 });
 
 
+/*GET ADMIN CREATE NEW BLOG POST */
+router.get('/add-blog-post',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals = {
+            title: "ADD BLOG POST",
+            description: "YUP"
+        }
+
+
+        res.render("admin/add-blog-post",{
+            locals,
+            layout: adminLayout
+        });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+
 
 /*POST ADMIN CREATE NEW POST */
-// router.post('/add-post',[authMiddleware],async (req,res) =>{
+// router.post('/add-blog-post',[authMiddleware],async (req,res) =>{
 //         try {
 //             let newPost;
 //             if(req.file !== undefined){
@@ -188,8 +210,8 @@ router.get('/add-post',authMiddleware,async (req,res) =>{
 // });
 
 
-router.post('/add-post',authMiddleware, async(req,res) =>{
-    upload(req,res,async (error)=>{
+router.post('/add-blog-post',authMiddleware, async(req,res) =>{
+    upload_cover(req,res,async (error)=>{
         if(error){
             console.log(error);
             res.status(400).json({message:"womp womp"});

@@ -6,11 +6,13 @@
     <title><%= locals.title %></title>
     <meta name="desc" content = "<%= locals.description %>">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="preload" href="/css/style.css" as="style">
     <link rel="stylesheet" href ="/css/style.css">
     <script type="text/javascript" defer src="/js/script.js"></script>
 </head>
 <body>
-    
+    <script>0</script>
+    <!-- Dummy script prevents flash of unstyled content on firefox for some reason -->
     <%- include("../partials/search.ejs")%>
 
     <div class="container">

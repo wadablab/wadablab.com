@@ -1,17 +1,12 @@
 <a href="/dashboard">&larr; Back</a>
-<div class="admin-title">
-    <h2>Add New Post</h2>
+
+
+<div class="add-post-elements">
+    
+    <a href="add-blog-post" class="add-post-element">New Blog Post</a>
+    <a href="add-blog-post" class="add-post-element">New Mini-Jam</a>
+    <a href="add-blog-post" class="add-post-element">New Gallery</a>
+    <a href="add-blog-post" class="add-post-element">New Video</a>
+    
+    
 </div>
-
-<form action="/add-post" method="POST" enctype="multipart/form-data">
-    <label for="title"><b>Title</b></label>
-    <input type="text" placeholder="Post Title" name="title">
-
-    <label for="cover"><b>Cover</b></label>
-    <input type="file" name="cover">
-
-    <label for="body"><b>Content</b></label>
-    <textarea name="body" placeholder="Blog your heart out"   cols="50" rows="10"></textarea>
-
-    <input type="submit" value="POST" class="btn">
-</form>
