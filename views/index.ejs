@@ -5,7 +5,7 @@
     <ul class = "article__ul">e
         <% data.forEach(post => { %>
             <li >e
-                <a class = "post" href="/post/<%= post._id %>"><em></em><% array.forEach(element => { %>
+                <a class = "post" href="/post/<%= post._id %>"><em></em><% data.forEach(post => { %>
                  
                 <% }) %>
                     <% if (post.cover_path !== "") { %>
