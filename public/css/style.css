@@ -267,8 +267,9 @@ textarea{
         width:100vw;
     }
     .post:hover img{
+        height:auto;
         width:100vw;
-        g=height:auto;
+        
         transition: 0.1s;
 }
     
