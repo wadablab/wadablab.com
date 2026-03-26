@@ -1,22 +1,23 @@
 <h1>HELLO</h1>
 
 <section class="articles">
-    <h2 class="articles__heading">Latest Posts :</h2>
+    <h2 class="article-list__heading">Latest Posts :</h2>
 
         <% data.forEach(post => { %>
 
                 <a class = "post" href="/post/<%= post._id %>">
                     <% if (post.cover_path !== "") { %>
-                        <img class="article__img"src="/uploads/<%= post.cover_path  %>"alt="">
+                        <img class="article-list__img"src="/uploads/<%= post.cover_path  %>"alt="">
                     <% } else {%>
-                         <img class="article__img"src="/uploads/no_image.png"alt="">
+                         <img class="article-list__img"src="/uploads/no_image.png"alt="">
 
                     <% } %>
                     <span class="article-list__title"><%= post.title %></span>
+                    <span class="article-list__preview">
+                        <%= post.body %>
+                    </span>
                     <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
                 </a>  
-                    
-
         <% }) %>
 
     <% if (nextPage !== null) { %>

@@ -96,17 +96,6 @@ router.post('/search', async(req,res) =>{
     }
 })
 
-
-
-
-
-
-
-
-
-
-
-
 router.get('/games',(req,res) =>{
     res.render('games');
 });
