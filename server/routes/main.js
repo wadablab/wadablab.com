@@ -9,10 +9,10 @@ const Post = require("../models/Post");
 router.get('',async (req,res) =>{
     try {
         const locals = {
-        title:"WADABLAND",
+        title:"wadablab.com",
         description: "where worms can feel at home"
         }
-        let perPage = 5;
+        let perPage = 3;
         let page = req.query.page || 1;
 
         const data = await Post.aggregate([{$sort:{createdAt: -1}}])

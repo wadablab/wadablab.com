@@ -8,6 +8,7 @@ const multer = require("multer");
 const path = require("path");
 
 const adminLayout = '../views/layouts/admin';
+const voidLayout = '../views/layouts/void';
 const jwtsecret = process.env.JWT_SECRET;
 
 /*move to middleware file */
@@ -66,25 +67,27 @@ router.get('/admin', async (req,res) =>{
 
 /*POST ADMIN CHECK LOGIN*/
 
-router.post('/admin', async (req,res) =>{
+
+
+router.post('/admin',async (req,res) =>{
     try {  
         const{username,password} = req.body;
 
         const user = await User.findOne({username});
         if(!user){
-            return res.status(401).json({message: 'Invalid credentials'});
+            res.redirect("/uh-oh");
+            return
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if(!isPasswordValid){
-            return res.status(401).json({message: 'Invalid credentials'});
+            res.redirect("/uh-oh");
+            return
         }
 
         const token = jwt.sign({userId: user._id}, jwtsecret);
-        res.cookie("token",token, {httpOnly: true});
-
-
+        res.cookie("token", token, {httpOnly: true});
         res.redirect('/dashboard');
 
         } catch (error) {
@@ -93,9 +96,22 @@ router.post('/admin', async (req,res) =>{
 });
 
 
+/*GET UH-OH */
 
-
-
+router.get('/uh-oh',async(req,res)=>{
+    try {
+        const locals = {
+            title: "uh-oh",
+            description: "scream"
+        };
+        res.render("admin/uh-oh",{
+            locals,
+            layout: voidLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 
 
@@ -163,7 +179,7 @@ router.post('/add-post',[authMiddleware,upload.single("cover")],async (req,res) 
             if(req.file !== undefined){
                 newPost = new Post({
                 title: req.body.title,
-                cover_path: req.file.originalname,
+                cover_path: (Date.now() + req.file.originalname),
                 body: req.body.body
             })}else{
                 newPost = new Post({

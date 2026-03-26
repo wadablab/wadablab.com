@@ -25,6 +25,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({mongoUrl: process.env.MONGODB_URI}),
+    cookie:{maxAge: new Date(Date.now()+(3600000))}
 }));
 
 
@@ -45,7 +46,7 @@ app.use('/',require('./server/routes/admin'));
 //connect to DB
 connectDB().then(
     app.listen(PORT, ()=>{
-    console.log(`App listening on port ${PORT}`)
+        console.log(`App listening on port ${PORT}`)
     }
 ));
 

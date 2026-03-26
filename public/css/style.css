@@ -3,8 +3,8 @@
 
 :root{
     --cream:#f7f1f3;
-    --gray:#144f56;
-    --red:#e63946;
+    --gray:#954860;
+    --red:#b54242;
     --black:#000000;
     --unemph_text: #3fa4af;
     --font-size-base: 1rem;
@@ -232,10 +232,10 @@ textarea{
     text-overflow: ellipsis;
     overflow: hidden;
     flex-direction: column;
-    filter: drop-shadow(0px 0px 5px #00000050);
+    filter: drop-shadow(0px 0px 5px #00000090);
     background: var(--gray);
     padding: 1.5rem;
-    margin:1.5rem;
+    margin-bottom:1.5rem;
     transition:0.1s;
 }
 
@@ -251,7 +251,7 @@ textarea{
 
 
 .post:hover{
-    filter: drop-shadow(0px 0px 5px black);
+    filter: drop-shadow(0px 0px 5px #000000c0);
     font-size: 1.2rem;
     transition: 0.1s;
 }
@@ -296,6 +296,7 @@ textarea{
 
 
 .article{
+    padding-bottom: 60px;
 }
 
 .article__body{
@@ -318,7 +319,29 @@ textarea{
     text-align: center;
 }
 
+/*ADMIN LOGIN*/
+.void__body{
+    background-color: black;
+}
 
+
+.jumpscare__div{
+    width:100vw;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    align-content: center;
+    top:0;
+    z-index: 20;
+    
+}
+
+.jumpscare{
+    height: 100%;
+    width: 100%;
+    display: fixed;
+    align-items: self-endcenter;
+}
 
 
 
