@@ -276,15 +276,16 @@ textarea{
         height:auto;
         width:100vw;
         
-        transition: 0.1s;
 }
     
     .article-list__title{
-        text-align: center;
+        text-align: left;
         font-size: 2rem;
     }
     .article-list__date{
-       text-align: end;
+       position: relative;
+        float:right;
+        padding:10px;
     }
 }
 
