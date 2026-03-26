@@ -5,6 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const fs = require("fs");
 const path = require("path");
 
 const adminLayout = '../views/layouts/admin';
@@ -12,20 +13,21 @@ const voidLayout = '../views/layouts/void';
 const jwtsecret = process.env.JWT_SECRET;
 
 /*move to middleware file */
-let ff;
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) =>{
         cb(null, "./public/uploads");
     },
     filename: (req, file, cb)=>{
-        ff=file;
+        const ff=file;
         console.log(ff);
-        cb(null,ff.originalname);
+        let newFileName = Date.now() + ff.originalname
+        cb(null,newFileName);
     }
 });
 
 
-const upload = multer({storage: storage});
+const upload = multer({storage: storage}).single('cover');
 
 
 /*ADMIN CHECK LOGIN*/
@@ -165,42 +167,58 @@ router.get('/add-post',authMiddleware,async (req,res) =>{
 
 
 /*POST ADMIN CREATE NEW POST */
-router.post('/add-post',[authMiddleware,upload.single("cover")],async (req,res) =>{
+// router.post('/add-post',[authMiddleware],async (req,res) =>{
+//         try {
+//             let newPost;
+//             if(req.file !== undefined){
+//                 newPost = new Post({
+//                     title: req.body.title,
+//                     cover_path: (Date.now() + req.file.originalname),
+//                     body: req.body.body
+//             })}else{
+//                 newPost = new Post({
+//                     title: req.body.title,
+//                     body: req.body.body
+//             })}
+//             await Post.create(newPost);
+//             res.redirect("/dashboard");
+//         } catch (error) {
+//             console.log(error);
+//         }
+// });
 
-   // try {
-        // const fileExt = (ff.mimetype).split('/').pop();
-        // if (fileExt=="png" || fileExt=="jpg"|| fileExt=="jpeg"){
-        //     data={
-        //         path: ff.originalname
-        //     }
-        // }
-        try {
-            let newPost;
-            if(req.file !== undefined){
-                newPost = new Post({
-                title: req.body.title,
-                cover_path: (Date.now() + req.file.originalname),
-                body: req.body.body
-            })}else{
-                newPost = new Post({
-                title: req.body.title,
-                body: req.body.body
-            })}
 
-            
-            
-            console.log(req.file);
-
-            await Post.create(newPost);
-            res.redirect("/dashboard");
-        } catch (error) {
+router.post('/add-post',authMiddleware, async(req,res) =>{
+    upload(req,res,async (error)=>{
+        if(error){
             console.log(error);
-        }
-  //  } catch (error) {
-   //     console.log(error);
-   // }
+            res.status(400).json({message:"womp womp"});
+        } else{
+            try{
+                let newPost;
+                if(req.file !== undefined){
+                    newPost = new Post({
+                        title: req.body.title,
+                        cover_path: res.req.file.filename,
+                        body: req.body.body
+                    })
+                }else{
+                    newPost = new Post({
+                        title: req.body.title,
+                        body: req.body.body
+                    })
+                }
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }}
 
+        
+    })
 });
+
+
 
 
 
@@ -276,7 +294,14 @@ router.post('/register', async (req, res) => {
 /*DELETE ADMIN DELETE POST */
 router.delete('/delete-post/:id',authMiddleware,async (req,res) =>{
     try {
-
+        let file = await Post.findById({_id : req.params.id});
+        fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
+            if(error){
+                console.log(error);
+                return
+                }
+            }   
+        );
         await Post.deleteOne({_id: req.params.id});
         res.redirect('/dashboard');
     } catch (error) {
