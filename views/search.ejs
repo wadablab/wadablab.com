@@ -1,14 +1,16 @@
 <h1>Search Results :</h1>
 
 <section class="articles">
-    <ul class = "article-ul">
         <% data.forEach(post => { %>
-            <li>
-                <a href="/post/<%= post._id %>">
-                    <span><%= post.title %></span>
+                <a class="post"href="/post/<%= post._id %>">
+                    <% if (post.cover_path !== "") { %>
+                        <img class="article__img"src="/uploads/<%= post.cover_path  %>"alt="">
+                    <% } else {%>
+                         <img class="article__img"src="/uploads/no_image.png"alt="">
+
+                    <% } %>
+                    <span class="article_list__title"><%= post.title %></span>
                     <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
                 </a>  
-            </li>  
         <% }) %>
-    </ul>
 </section>

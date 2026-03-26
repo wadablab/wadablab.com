@@ -6,6 +6,7 @@
     --gray:#144f56;
     --red:#e63946;
     --black:#000000;
+    --unemph_text: #3fa4af;
     --font-size-base: 1rem;
 }
 
@@ -54,7 +55,7 @@ textarea{
 /*LAYOUT*/
 
 .container{
-    max-width: 100%;
+    width: 100%;
     min-height: 100vh;
     margin: 0 auto;
     display: flex;
@@ -62,14 +63,21 @@ textarea{
 }
 
 .main{
-    padding: 0px 4rem;
+    padding: 0px 40px;
     flex-shrink: 0;
     flex-grow: 1;
 
 }
 
+@media(max-width: 800px){
+    .main{
+        padding:0 0;
+        margin: 0;
+    }
+}
+
 .headers{
-    filter: drop-shadow(0px 0px 5px black);
+    filter: drop-shadow(0px 0px 5px #00000050);
 }
 
 .header{
@@ -151,17 +159,20 @@ textarea{
 
 
 .searchBar{
+    position: absolute;
+    left:0;
+    right:0;
     visibility: hidden;
     transform: translateY(-3rem);
     transition: 0.1s;
-    position:absolute;
-    left: 0;
-    right: 0;
+    z-index: 10;
+    width:100%;
     align-content: center;
     display:inline-block;
     height: 3rem;
     background-color: var(--black);
     padding: 4px 0;
+   
 }
 
 .searchBar.open {
@@ -189,31 +200,33 @@ textarea{
       
 }
 
-.article__ul{ 
-
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-}
 
 .article-list__date{
-    float:right
+    text-align: end;
+    color: var(--unemph_text);
 }
 
 .post{
-    display: block;
-    filter: drop-shadow(0px 0px 5px #000000a0);
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(0px 0px 5px #00000050);
     background: var(--gray);
     padding: 1.5rem;
-    margin-bottom:1.5rem;
+    margin:1.5rem;
     transition:0.1s;
 }
+
 
 .post img{
     height: 200px;
     width:200px;
     transition: 0.1s;
 }
+
+
+
 .post:hover{
     filter: drop-shadow(0px 0px 5px black);
     font-size: 1.2rem;
@@ -223,20 +236,15 @@ textarea{
     height:220px;
     width:220px;
     transition: 0.1s;
-}dq
-
-
-.post a{
-    text-decoration: none;
-    
 }
+
 
 
 
 .article-list__title{
     font-size: 2.5rem;
     text-decoration: none;
-    text-align: center;
+    
 }
 
 
@@ -248,7 +256,27 @@ textarea{
 }
 
 
+@media(max-width: 800px){
+    .post{
+        padding:0;
+        margin:0;
+        margin-bottom: 2.5rem;
+    }
+    .post img{
+        height:auto;
+        width:100vw;
+    }
+    .article-list__title{
+        text-align: center;
+        font-size: 2rem;
+    }
+    .article-list__date{
+       text-align: end;
+    }
+}
+
 .footer{
+    filter: drop-shadow(0px 0px 5px #00000050);
     background-color:var(--red);
     align-content: flex-end;
 }
