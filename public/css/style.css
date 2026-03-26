@@ -216,7 +216,11 @@ textarea{
 }
 
 .article-list__date{
-    float: right;
+    
+    position:absolute;
+    right:0px;
+    bottom:0px;
+    padding:15px;
     color: var(--unemph_text);
 }
 
@@ -224,7 +228,7 @@ textarea{
     
     text-decoration: none;
     display: block;
-    
+    position: relative;
     text-overflow: ellipsis;
     overflow: hidden;
     flex-direction: column;
@@ -293,6 +297,7 @@ textarea{
 }
 
 .article__body{
+    font-weight:300;
     display:block;
 }
 
@@ -308,7 +313,7 @@ textarea{
 .footer{
     filter: drop-shadow(0px -5px 5px #00000050);
     background-color:var(--red);
-    align-content: flex-end;
+    text-align: center;
 }
 
 
