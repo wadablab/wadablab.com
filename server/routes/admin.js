@@ -276,12 +276,28 @@ router.post('/register', async (req, res) => {
 /*DELETE ADMIN DELETE POST */
 router.delete('/delete-post/:id',authMiddleware,async (req,res) =>{
     try {
+
         await Post.deleteOne({_id: req.params.id});
         res.redirect('/dashboard');
     } catch (error) {
         console.log(error);
     }
 });
+
+//DELETE PICTURE FILE FROM SERVER
+// const fs = require('fs')
+
+// const path = './file.txt'
+
+// fs.unlink(path, (err) => {
+//   if (err) {
+//     console.error(err)
+//     return
+//   }
+// })
+
+
+
 
 
 /*GET ADMIN LOGOUT */

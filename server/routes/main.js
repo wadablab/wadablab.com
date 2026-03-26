@@ -12,7 +12,7 @@ router.get('',async (req,res) =>{
         title:"wadablab.com",
         description: "where worms can feel at home"
         }
-        let perPage = 3;
+        let perPage = 5;
         let page = req.query.page || 1;
 
         const data = await Post.aggregate([{$sort:{createdAt: -1}}])

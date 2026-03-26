@@ -13,26 +13,22 @@ document.addEventListener('DOMContentLoaded', function(){
             searchInput.focus();
         })
     }
-    
-    searchClose.addEventListener('click',function(){
-            searchBar.style.visibility = 'hidden';
-            searchBar.classList.remove('open');
-            this.setAttribute('aria-expanded','false');
-            searchInput.focus();
+    if(searchClose){
+        searchClose.addEventListener('click',()=>{
+        searchBar.style.visibility = 'hidden';
+        searchBar.classList.remove('open');
+        this.setAttribute('aria-expanded','false');
         })
+    }
+    
 });
 
 let foxy = document.querySelector('.jumpscare');
-foxy.addEventListener('ended',()=>{
-    foxy.style.visibility='hidden';
-    window.location.replace("/admin");
-    }
-);
+if(foxy){
+    foxy.addEventListener('ended',()=>{
+        foxy.style.visibility='hidden';
+        window.location.replace("/admin");
+        }
+    );
+;}
 
-
-
-async function fetchAsync (url) {
-  let response = await fetch(url);
-  let data = await response.json();
-  return data;
-}
