@@ -266,6 +266,12 @@ textarea{
         height:auto;
         width:100vw;
     }
+    .post:hover img{
+        width:100vw;
+        g=height:auto;
+        transition: 0.1s;
+}
+    
     .article-list__title{
         text-align: center;
         font-size: 2rem;
