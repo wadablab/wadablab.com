@@ -188,27 +188,7 @@ router.get('/add-blog-post',authMiddleware,async (req,res) =>{
 
 
 
-/*POST ADMIN CREATE NEW POST */
-// router.post('/add-blog-post',[authMiddleware],async (req,res) =>{
-//         try {
-//             let newPost;
-//             if(req.file !== undefined){
-//                 newPost = new Post({
-//                     title: req.body.title,
-//                     cover_path: (Date.now() + req.file.originalname),
-//                     body: req.body.body
-//             })}else{
-//                 newPost = new Post({
-//                     title: req.body.title,
-//                     body: req.body.body
-//             })}
-//             await Post.create(newPost);
-//             res.redirect("/dashboard");
-//         } catch (error) {
-//             console.log(error);
-//         }
-// });
-
+/*POST ADMIN CREATE NEW BLOG POST */
 
 router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
@@ -235,8 +215,6 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
             }catch(error){
                 console.log(error);
             }}
-
-        
     })
 });
 
