@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 const PostSchema = new Schema({
+    type:{
+        type: String,
+        required: true
+    },
     title:{
         type: String,
         required: true
@@ -12,8 +16,31 @@ const PostSchema = new Schema({
     },
     cover_path:{
         type: String,
-        required: false,
         default: ""
+    },
+    audio_path:{
+        type: String,
+        default:""
+    },
+    video_path:{
+        type: String,
+        default:""
+    },
+    insta_link:{
+        type: String,
+        defalut: ""
+    },
+    soundcloud_link:{
+        type: String,
+        defalut: ""
+    },
+    pinterest_link:{
+        type: String,
+        defalut: ""
+    },
+    youtube_link:{
+        type: String,
+        defalut: ""
     },
     createdAt: {
         type: Date,
