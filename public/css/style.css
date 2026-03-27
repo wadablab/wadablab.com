@@ -346,7 +346,7 @@ input[type=submit]{
     height: 100%;
     width: 100%;
     display: fixed;
-    align-items: self-endcenter;
+    align-items:center;
 }
 
 
