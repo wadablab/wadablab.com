@@ -4,7 +4,7 @@
 :root{
     --cream:#f7f1f3;
     --gray:#954860;
-    --red:#b54242;
+    --red:#a03939;
     --black:#000000;
     --unemph_text: #954860;
     --font-size-base: 1rem;
@@ -200,9 +200,6 @@ input[type=submit]{
     align-content: center;
 }
 
-.article-list__heading{
-      
-}
 
 .article-list__title{
     display: block;
@@ -215,6 +212,7 @@ input[type=submit]{
     text-indent: 1rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp:3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -369,17 +367,24 @@ input[type=submit]{
 
 .add-post-element:hover{
     filter: drop-shadow(0px 0px 5px #000000d0);
-    font-size: 1.2rem;
-    margin: 5px;
+    font-size: 1.1rem;
+    margin: 0px;
     transition: 0.1s;
 }
 
-.add-post-element{
-    text-decoration:none;
+.add-post-element-links{
+    width: 100%;
+    display: grid;
+    text-align: center;
+}
+
+.add-post-element-links a{
+    text-decoration: none;
+    background: var(--red);
+    padding:35px 20px;
+    margin:10px 25px 10px 25px;
     
-}s
-
-
+}
 
 
 
