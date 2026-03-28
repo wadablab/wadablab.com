@@ -20,8 +20,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb)=>{
         const ff=file;
-        console.log(ff);
-        let newFileName = Date.now() + ff.originalname
+        let newFileName = Date.now() + ff.originalname;
         cb(null,newFileName);
     }
 });
@@ -186,26 +185,42 @@ router.get('/add-blog-post',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN CREATE NEW BLOG POST EMBED*/
+router.get('/add-blog-post-embed',authMiddleware,async (req,res) =>{
 
+    try {
+        const locals = {
+            title: "ADD BLOG POST",
+            description: "YUP"
+        }
+        res.render("admin/add-blog-post-embed",{
+            locals,
+            layout: adminLayout
+        });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 /*POST ADMIN CREATE NEW BLOG POST */
 
 router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
-        if(error){
-            console.log(error);
-            res.status(400).json({message:"womp womp"});
-        } else{
             try{
                 let newPost;
                 if(req.file !== undefined){
                     newPost = new Post({
+                        type:"blog-post",
                         title: req.body.title,
                         cover_path: res.req.file.filename,
                         body: req.body.body
                     })
                 }else{
                     newPost = new Post({
+                        type:"blog-post",
                         title: req.body.title,
                         body: req.body.body
                     })
@@ -214,11 +229,28 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
                 res.redirect("/dashboard");
             }catch(error){
                 console.log(error);
-            }}
+            }
     })
 });
 
+/*POST ADMIN CREATE NEW BLOG POST EMBED*/
 
+router.post('/add-blog-post-embed',authMiddleware, async(req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let newPost= new Post({
+                    type:"blog-post-embed",
+                    title: req.body.title,
+                    insta_link: req.body.insta_link,
+                    body: req.body.body
+                }) 
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
 
 
 
@@ -248,17 +280,47 @@ router.get('/edit-post/:id',authMiddleware,async (req,res) =>{
 /*PUT ADMIN EDIT POST */
 router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
 
-    try {
-        await Post.findByIdAndUpdate(req.params.id, {
-            title: req.body.title,
-            body: req.body.body,
-            updatedAt: Date.now()
-        });
+    // upload_cover(req,res,async (error)=>{
+    // if(error){
+    //     console.log(error);
+    //     }
+    // else{
+    //     let file = await Post.findById({_id : req.params.id});
+    //     fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
+    //         if(error){
+    //             console.log(error);
+    //             return
+    //         }
+    //     }
+    // );
+    //     console.log("yipee");
+    // }
+    // });
+    // res.redirect("/dashboard");
 
-        res.redirect("/dashboard");;
-    } catch (error) {
-        console.log(error);
-    }
+    upload_cover(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                if (res.req.file){
+                    await fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    cover_path: (res.req.file ? res.req.file.filename : file.cover_path),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
 
 });
 
@@ -269,25 +331,25 @@ router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
  * POST /
  * Admin - Register
 */
-router.post('/register', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+// router.post('/register', async (req, res) => {
+//   try {
+//     const { username, password } = req.body;
+//     const hashedPassword = await bcrypt.hash(password, 10);
 
-    try {
-      const user = await User.create({ username, password:hashedPassword });
-      res.status(201).json({ message: 'User Created', user });
-    } catch (error) {
-      if(error.code === 11000) {
-        res.status(409).json({ message: 'User already in use'});
-      }
-      res.status(500).json({ message: 'Internal server error'})
-    }
+//     try {
+//       const user = await User.create({ username, password:hashedPassword });
+//       res.status(201).json({ message: 'User Created', user });
+//     } catch (error) {
+//       if(error.code === 11000) {
+//         res.status(409).json({ message: 'User already in use'});
+//       }
+//       res.status(500).json({ message: 'Internal server error'})
+//     }
 
-  } catch (error) {
-    console.log(error);
-  }
-});
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 
 

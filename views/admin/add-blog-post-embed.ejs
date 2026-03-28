@@ -3,14 +3,13 @@
     <h1>Add New Post</h1>
 </div>
 
-<form action="/add-blog-post" method="POST" enctype="multipart/form-data">
-    
+<form action="/add-blog-post-embed" method="POST" enctype="multipart/form-data">
 
     <label for="title"><h2>Title</h2></label>
     <input type="text" placeholder="Post Title" name="title">
 
-    <label for="cover"><h2>Cover</h2></label>
-    <input type="file" name="cover"><br>
+    <label for="insta_link"><h2>Instagram Embed Link</h2></label>
+    <input type="text" placeholder="Link..." name="insta_link">
 
     <label for="body"><h2>Content</h2></label>
     <textarea name="body" placeholder="Blog your heart out"   cols="50" rows="10"></textarea>

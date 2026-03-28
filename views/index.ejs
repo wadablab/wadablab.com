@@ -6,12 +6,26 @@
         <% data.forEach(post => { %>
 
                 <a class = "post" href="/post/<%= post._id %>">
-                    <% if (post.cover_path !== "") { %>
-                        <img class="article-list__img"src="/uploads/<%= post.cover_path  %>"alt="">
-                    <% } else {%>
-                         <img class="article-list__img"src="/uploads/no_image.png"alt="">
+                    <% switch(post.type){
+                        case "blog-post-embed": %>
+                            <img class="article-list__img"src="/img/insta-post.png"alt="">
+                    <% break;
+                        default : 
+                            if(post.cover_path == ""){%>
+                                <img class="article-list__img"src="/img/no_image.png"alt="">
+                              <%} else {%>
+                                <img class="article-list__img"src="/uploads/<%= post.cover_path  %>"alt="">
+                              <%} %>  
+                    <% break;
+                    } %>
+                     
 
-                    <% } %>
+
+
+
+
+                    
+
                     <span class="article-list__title"><%= post.title %></span>
                     <span class="article-list__preview">
                         <%= post.body %>
@@ -23,7 +37,6 @@
     <% if (nextPage !== null) { %>
         <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
     <% } %>
-
-
-    
 </section>
+
+ 

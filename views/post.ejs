@@ -1,18 +1,23 @@
 
 
-<article class = "article">
-    <h1 class="article__title"><%= data.title %></h1>
-    <div class="article__body">
-        <% if (data.cover_path == "") { %>
-            <%- data.body %>
-        <% }else{%>
-            <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
-            <%- data.body %>
-    
-        
-    <%}%>
-    </div>
-    
+<% switch(data.type) { 
+    case "blog-post" :%>
+        <article class = "article">
+            <h1 class="article__title"><%= data.title %></h1>
+            <div class="article__body">
+                <% if (data.cover_path !== "") { %>
+                    <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
+                <%}%>
+                    <%- data.body %>
+            </div>
+        </article>
 
-    
-</article>
+    <% break;
+    case "blog-post-embed":%>
+        <article class = "article">
+            <h1 class="article__title"><%= data.title %></h1>
+            <div class="article__insta"><%- data.insta_link %></div>
+            <div class="article__body"><%- data.body %></div>
+        </article>
+    <% break;
+} %>
