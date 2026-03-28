@@ -5,10 +5,10 @@
         <article class = "article">
             <h1 class="article__title"><%= data.title %></h1>
             <div class="article__body">
-                <% if (data.cover_path !== "") { %>
-                    <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
-                <%}%>
-                    <%- data.body %>
+            <% if (data.cover_path !== "") { %>
+                <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
+            <%}%>
+                <%- data.body %>
             </div>
         </article>
 
@@ -19,5 +19,21 @@
             <div class="article__insta"><%- data.insta_link %></div>
             <div class="article__body"><%- data.body %></div>
         </article>
+    <% break;
+
+    case "mini-jam" :%>
+        <article>
+            <h1 class="article__title"><%= data.title %></h1>
+            <% if (data.cover_path !== "") { %>
+                <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
+            <%}%>
+            <div class="article__audio">
+                <audio src="/uploads/<%- data.audio_path %>" controls></audio>
+            </div>
+            <div class="article__body"><%- data.body %></div>
+        </article>
+
+
+
     <% break;
 } %>
