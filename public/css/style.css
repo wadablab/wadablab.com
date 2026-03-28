@@ -398,7 +398,12 @@ input[type=submit]{
 }
 
 
-
+model-viewer{
+    background-color: #ab6a7e;
+    position : relative;
+    height: 500px;
+    width: 500px;
+}
 
 
 
