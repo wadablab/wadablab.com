@@ -416,7 +416,7 @@ router.put('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
                     }
                 });
                 }
-                if (res.req.files.audio){
+                if (res.req.files.audio && file.audio_path !== ""){
                     await fs.unlink("./public/uploads/" + file.audio_path, (error)=>{
                     if(error){
                         console.log(error);
