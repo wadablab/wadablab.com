@@ -10,6 +10,15 @@
                         case "blog-post-embed": %>
                             <img class="article-list__img"src="/img/insta-post.png"alt="">
                     <% break;
+                        case "mini-jam-embed": %>
+                            <img class="article-list__img"src="/img/soundcloud-post.png"alt="">
+                    <% break;
+                        case "gallery-embed": %>
+                    
+                    <% break;
+                        case "video-embed": %>
+
+                    <% break;
                         default : 
                             if(post.cover_path == ""){%>
                                 <img class="article-list__img"src="/img/no_image.png"alt="">
@@ -18,13 +27,6 @@
                               <%} %>  
                     <% break;
                     } %>
-                     
-
-
-
-
-
-                    
 
                     <span class="article-list__title"><%= post.title %></span>
                     <span class="article-list__preview">

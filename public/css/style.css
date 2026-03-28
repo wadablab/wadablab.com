@@ -6,7 +6,7 @@
     --gray:#954860;
     --red:#a03434;
     --black:#000000;
-    --unemph_text: #954860;
+    --unemph_text: #ab6a7e;
     --font-size-base: 1rem;
 }
 
@@ -317,6 +317,12 @@ input[type=submit]{
     float:left;
     width:330px;
     margin-right:10px
+}
+
+.article__soundcloud{
+    width: 25vw;
+    float:left;
+    margin-right:10px;
 }
 
 /*FOOTER*/

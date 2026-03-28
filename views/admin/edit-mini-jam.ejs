@@ -1,0 +1,21 @@
+<a href="/dashboard">&larr; Back</a>
+<div class="admin-title">
+    <h2>Edit Mini Jam</h2>
+
+</div>
+
+<form action="/edit-mini-jam/<%= data._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+    <label for="title"><b>Title</b></label>
+    <input type="text" placeholder="Post Title" name="title" value="<%= data.title %>">
+
+    <label for="cover"><h2>Cover</h2></label>
+    <input type="file" name="cover" value=""><br>
+
+    <label for="audio"><h2>Audio</h2></label>
+    <input type="file" name="audio" value=""><br>
+
+    <label for="body"><h2>Content</h2></label>
+    <textarea name="body" cols="50" rows="10"><%= data.body %></textarea>
+
+    <input type="submit" value="UPDATE" class="btn">
+</form>

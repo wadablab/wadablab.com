@@ -27,8 +27,7 @@ const storage = multer.diskStorage({
 
 
 const upload_cover = multer({storage: storage}).single('cover');
-const upload_cover_song = multer({storage: storage}).any();
-
+const upload_cover_song = multer({storage: storage}).fields([{name: 'cover'},{name: 'audio'}]);
 
 /*ADMIN CHECK LOGIN*/
 
@@ -228,6 +227,25 @@ router.get('/add-mini-jam',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN CREATE NEW MINI JAM EMBED*/
+router.get('/add-mini-jam-embed',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals = {
+            title: "ADD MINI JAM",
+            description: "YUP"
+        }
+        res.render("admin/add-mini-jam-embed",{
+            locals,
+            layout: adminLayout
+        });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 /*POST ADMIN CREATE NEW BLOG POST */
 
@@ -259,12 +277,11 @@ router.post('/add-mini-jam',authMiddleware, async(req,res) =>{
     upload_cover_song(req,res,async (error)=>{
             try{
                 let newPost;
-                console.log(res.req.files);
                 newPost = new Post({
                     type:"mini-jam",
                     title: req.body.title,
-                    cover_path:(res.req.files[0].filename),
-                    audio_path:(res.req.files[1].filename),
+                    cover_path: req.files.cover ? req.files.cover[0].filename : "",
+                    audio_path: req.files.audio[0].filename,
                     body: req.body.body
                 })
                 await Post.create(newPost);
@@ -295,10 +312,27 @@ router.post('/add-blog-post-embed',authMiddleware, async(req,res) =>{
     })
 });
 
+/*POST ADMIN CREATE NEW MINI JAM EMBED*/
 
+router.post('/add-mini-jam-embed',authMiddleware, async(req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let newPost= new Post({
+                    type:"mini-jam-embed",
+                    title: req.body.title,
+                    soundcloud_link: req.body.soundcloud_link,
+                    body: req.body.body
+                }) 
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
 
 /*GET ADMIN EDIT BLOG POST */
-router.get('/edit-post/:id',authMiddleware,async (req,res) =>{
+router.get('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
 
     try {
         const locals ={
@@ -308,7 +342,7 @@ router.get('/edit-post/:id',authMiddleware,async (req,res) =>{
         const data = await Post.findOne({_id: req.params.id});
 
 
-        res.render('admin/edit-post',{
+        res.render('admin/edit-blog-post',{
             locals,
             data,
             layout: adminLayout
@@ -319,13 +353,34 @@ router.get('/edit-post/:id',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN EDIT MINI JAM */
+router.get('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals ={
+            title:"Edit post",
+            description: "jesus"
+        }
+        const data = await Post.findOne({_id: req.params.id});
+
+
+        res.render('admin/edit-mini-jam',{
+            locals,
+            data,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 /*PUT ADMIN EDIT BLOG POST */
-router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
+router.put('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
                 let file = await Post.findById({_id : req.params.id});
-                if (res.req.file){
+                if (res.req.file && file.cover_path !== ""){
                     await fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
                     if(error){
                         console.log(error);
@@ -348,6 +403,42 @@ router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
 
 });
 
+/*PUT ADMIN EDIT MINI JAM */
+router.put('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
+    upload_cover_song(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                if (res.req.files.cover && file.cover_path !== ""){
+                    await fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                if (res.req.files.audio){
+                    await fs.unlink("./public/uploads/" + file.audio_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    cover_path: (res.req.files.cover ? res.req.files.cover[0].filename : file.cover_path),
+                    audio_path: (res.req.files.audio ? res.req.files.audio[0].filename : file.audio_path),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+
+});
 
 
 

@@ -11,8 +11,31 @@
             <%= post.title %> &nearr;
         </a>
         <div class="admin-post-controls">
-            <a href="/edit-post/<%= post._id %>" class = "btn">Edit</a>
-
+            <% switch (post.type) {
+                case "blog-post" :%>
+                    <a href="/edit-blog-post/<%= post._id %>" class = "btn">Edit Blog Post</a>
+                <% break;
+                case "blog-post-embed" :%>
+                    <a href="/edit-blog-post-embed/<%= post._id %>" class = "btn">Edit Insta Post</a>
+                <% break;
+                case "mini-jam" :%>
+                    <a href="/edit-mini-jam/<%= post._id %>" class = "btn">Edit Mini Jam</a>
+                <% break;
+                case "mini-jam-embed" :%>
+                    <a href="/edit-mini-jam-embed/<%= post._id %>" class = "btn">Edit Soundcloud Post</a>
+                <% break;
+                case "gallery" :%>
+                    <a href="/edit-gallery/<%= post._id %>" class = "btn">Edit Gallery</a>
+                <% break;
+                case "gallery-embed" :%>
+                    <a href="/edit-gallery-embed/<%= post._id %>" class = "btn">Edit Pinterest Post</a>
+                <% break;
+                case "video" :%>
+                    <a href="/edit-video/<%= post._id %>" class = "btn">Edit Video</a>
+                <% break;
+                case "video-embed" :%>
+                    <a href="/edit-video-embed/<%= post._id %>" class = "btn">Edit Youtube Post</a>
+                <% break;}%>
             <form action="/delete-post/<%= post._id %>?_method=DELETE" method="POST">
                 <input type="submit" value="Delete" class="btn">
             </form>
