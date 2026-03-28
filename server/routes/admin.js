@@ -28,6 +28,7 @@ const storage = multer.diskStorage({
 
 const upload_cover = multer({storage: storage}).single('cover');
 const upload_cover_song = multer({storage: storage}).fields([{name: 'cover'},{name: 'audio'}]);
+const upload_cover_video = multer({storage: storage}).fields([{name: 'cover'},{name: 'video'}]);
 
 /*ADMIN CHECK LOGIN*/
 
@@ -239,8 +240,42 @@ router.get('/add-mini-jam-embed',authMiddleware,async (req,res) =>{
             locals,
             layout: adminLayout
         });
+    } catch (error) {
+        console.log(error);
+    }
 
+});
 
+/*GET ADMIN CREATE NEW VIDEO*/
+router.get('/add-video',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals = {
+            title: "ADD MINI JAM",
+            description: "YUP"
+        }
+        res.render("admin/add-video",{
+            locals,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+/*GET ADMIN CREATE NEW VIDEO*/
+router.get('/add-video-embed',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals = {
+            title: "ADD VIDEO",
+            description: "YUP"
+        }
+        res.render("admin/add-video-embed",{
+            locals,
+            layout: adminLayout
+        });
     } catch (error) {
         console.log(error);
     }
@@ -292,6 +327,26 @@ router.post('/add-mini-jam',authMiddleware, async(req,res) =>{
     })
 });
 
+/*POST ADMIN CREATE NEW VIDEO*/
+
+router.post('/add-video',authMiddleware, async(req,res) =>{
+    upload_cover_video(req,res,async (error)=>{
+            try{
+                let newPost;
+                newPost = new Post({
+                    type:"video",
+                    title: req.body.title,
+                    cover_path: req.files.cover ? req.files.cover[0].filename : "",
+                    video_path: req.files.video[0].filename,
+                    body: req.body.body
+                })
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
 
 /*POST ADMIN CREATE NEW BLOG POST EMBED*/
 
@@ -330,6 +385,26 @@ router.post('/add-mini-jam-embed',authMiddleware, async(req,res) =>{
             }
     })
 });
+
+/*POST ADMIN CREATE NEW VIDEO*/
+
+router.post('/add-video-embed',authMiddleware, async(req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let newPost= new Post({
+                    type:"video-embed",
+                    title: req.body.title,
+                    youtube_link: req.body.youtube_link,
+                    body: req.body.body
+                }) 
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
+
 
 /*GET ADMIN EDIT BLOG POST */
 router.get('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
@@ -419,6 +494,27 @@ router.get('/edit-mini-jam-embed/:id',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN EDIT VIDEO */
+router.get('/edit-video/:id',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals ={
+            title:"Edit post",
+            description: "jesus"
+        }
+        const data = await Post.findOne({_id: req.params.id});
+
+
+        res.render('admin/edit-video',{
+            locals,
+            data,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
 
 /*PUT ADMIN EDIT BLOG POST */
 router.put('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
@@ -505,7 +601,63 @@ router.put('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
 
 });
 
+/*PUT ADMIN EDIT MINI JAM EMBED*/
+router.put('/edit-mini-jam-embed/:id',authMiddleware,async (req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    soundcloud_link: (req.body.soundcloud_link !== "" ? req.body.soundcloud_link : file.soundcloud_link),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
 
+});
+
+
+
+/*PUT ADMIN EDIT VIDEO*/
+router.put('/edit-video/:id',authMiddleware,async (req,res) =>{
+    upload_cover_song(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                if (res.req.files.cover && file.cover_path !== ""){
+                    await fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                if (res.req.files.video && file.audivideo_path !== ""){
+                    await fs.unlink("./public/uploads/" + file.video_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    cover_path: (res.req.files.cover ? res.req.files.cover[0].filename : file.cover_path),
+                    audio_path: (res.req.files.video ? res.req.files.video[0].filename : file.video_path),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+
+});
 
 /**
  * POST /
@@ -533,7 +685,7 @@ router.put('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
 
 
 
-/*DELETE ADMIN DELETE POST */
+/*DELETE ADMIN DELETE POST (ANY)*/
 router.delete('/delete-post/:id',authMiddleware,async (req,res) =>{
     try {
         let file = await Post.findById({_id : req.params.id});

@@ -325,6 +325,16 @@ input[type=submit]{
     margin-right:10px;
 }
 
+.article__video video{
+    max-height: 75vh;
+    float: left;
+    margin-right:10px
+}
+
+.article__youtube{
+    float:left;
+}
+
 /*FOOTER*/
 .footer{
     filter: drop-shadow(0px -5px 5px #00000050);

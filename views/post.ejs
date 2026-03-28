@@ -33,8 +33,6 @@
             <div class="article__body"><%- data.body %></div>
         </article>
 
-
-
     <% break;
     case "mini-jam-embed" : %>
         <article class = "article">
@@ -42,5 +40,26 @@
             <div class="article__soundcloud"><%- data.soundcloud_link %></div>
             <div class="article__body"><%= data.body %></div>
         </article>
+
+    <% break;
+    case "video" : %>
+    <article>
+            <h1 class="article__title"><%= data.title %></h1>
+            <% if (data.cover_path !== "") { %>
+                <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
+            <%}%>
+            <div class="article__video">
+                <video src="/uploads/<%- data.video_path %>" controls></audio>
+            </div>
+            <div class="article__body"><%- data.body %></div>
+        </article>
+    <% break;
+    case "video-embed" : %>
+        <article class = "article">
+            <h1 class="article__title"><%= data.title %></h1>
+            <div class="article__youtube"><%- data.youtube_link %></div>
+            <div class="article__body"><%= data.body %></div>
+        </article>
+
     <% break;
 } %>

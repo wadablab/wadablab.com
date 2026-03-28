@@ -1,0 +1,18 @@
+<a href="/dashboard">&larr; Back</a>
+<div class="admin-title">
+    <h2>Edit Youtube Post</h2>
+
+</div>
+
+<form action="/edit-video-embed/<%= data._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+    <label for="title"><b>Title</b></label>
+    <input type="text" placeholder="Post Title" name="title" value="<%= data.title %>">
+
+    <label for="youtube_link"><h2>Youtube Embed Link</h2></label>
+    <input type="text" placeholder="Link..." name="youtube_link">
+
+    <label for="body"><h2>Content</h2></label>
+    <textarea name="body" cols="50" rows="10"><%= data.body %></textarea>
+
+    <input type="submit" value="UPDATE" class="btn">
+</form>
