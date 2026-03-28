@@ -353,6 +353,28 @@ router.get('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN EDIT BLOG POST EMBED*/
+router.get('/edit-blog-post-embed/:id',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals ={
+            title:"Edit post",
+            description: "jesus"
+        }
+        const data = await Post.findOne({_id: req.params.id});
+
+
+        res.render('admin/edit-blog-post-embed',{
+            locals,
+            data,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
 /*GET ADMIN EDIT MINI JAM */
 router.get('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
 
@@ -374,6 +396,29 @@ router.get('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
     }
 
 });
+
+/*GET ADMIN EDIT MINI JAM EMBED*/
+router.get('/edit-mini-jam-embed/:id',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals ={
+            title:"Edit post",
+            description: "jesus"
+        }
+        const data = await Post.findOne({_id: req.params.id});
+
+
+        res.render('admin/edit-mini-jam-embed',{
+            locals,
+            data,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
 
 /*PUT ADMIN EDIT BLOG POST */
 router.put('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
@@ -402,6 +447,26 @@ router.put('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
     })
 
 });
+
+/*PUT ADMIN EDIT BLOG POST EMBED*/
+router.put('/edit-blog-post-embed/:id',authMiddleware,async (req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    insta_link: (req.body.insta_link !== "" ? req.body.insta_link : file.insta_link),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+
+});
+
 
 /*PUT ADMIN EDIT MINI JAM */
 router.put('/edit-mini-jam/:id',authMiddleware,async (req,res) =>{
