@@ -27,6 +27,7 @@ const storage = multer.diskStorage({
 
 
 const upload_cover = multer({storage: storage}).single('cover');
+const upload_cover_song = multer({storage: storage}).any();
 
 
 /*ADMIN CHECK LOGIN*/
@@ -205,26 +206,42 @@ router.get('/add-blog-post-embed',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN CREATE NEW MINI JAM */
+router.get('/add-mini-jam',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals = {
+            title: "ADD MINI JAM",
+            description: "YUP"
+        }
+
+
+        res.render("admin/add-mini-jam",{
+            locals,
+            layout: adminLayout
+        });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+
 /*POST ADMIN CREATE NEW BLOG POST */
 
 router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
                 let newPost;
-                if(req.file !== undefined){
-                    newPost = new Post({
-                        type:"blog-post",
-                        title: req.body.title,
-                        cover_path: res.req.file.filename,
-                        body: req.body.body
-                    })
-                }else{
-                    newPost = new Post({
-                        type:"blog-post",
-                        title: req.body.title,
-                        body: req.body.body
-                    })
-                }
+                console.log(req.body.body);
+                newPost = new Post({
+                    type:"blog-post",
+                    title: req.body.title,
+                    cover_path:(res.req.file ? res.req.file.filename : ""),
+                    body: req.body.body
+                })
                 await Post.create(newPost);
                 res.redirect("/dashboard");
             }catch(error){
@@ -232,6 +249,29 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
             }
     })
 });
+
+/*POST ADMIN CREATE NEW MINI JAM*/
+
+router.post('/add-mini-jam',authMiddleware, async(req,res) =>{
+    upload_cover_song(req,res,async (error)=>{
+            try{
+                let newPost;
+                console.log(res.req.files[1].filename);
+                newPost = new Post({
+                    type:"mini-jam",
+                    title: req.body.title,
+                    cover_path:(res.req.files[0].filename),
+                    audio_path:(res.req.files[1].filename),
+                    body: req.body.body
+                })
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
+
 
 /*POST ADMIN CREATE NEW BLOG POST EMBED*/
 
@@ -254,7 +294,7 @@ router.post('/add-blog-post-embed',authMiddleware, async(req,res) =>{
 
 
 
-/*GET ADMIN EDIT POST */
+/*GET ADMIN EDIT BLOG POST */
 router.get('/edit-post/:id',authMiddleware,async (req,res) =>{
 
     try {
@@ -277,27 +317,8 @@ router.get('/edit-post/:id',authMiddleware,async (req,res) =>{
 });
 
 
-/*PUT ADMIN EDIT POST */
+/*PUT ADMIN EDIT BLOG POST */
 router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
-
-    // upload_cover(req,res,async (error)=>{
-    // if(error){
-    //     console.log(error);
-    //     }
-    // else{
-    //     let file = await Post.findById({_id : req.params.id});
-    //     fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
-    //         if(error){
-    //             console.log(error);
-    //             return
-    //         }
-    //     }
-    // );
-    //     console.log("yipee");
-    // }
-    // });
-    // res.redirect("/dashboard");
-
     upload_cover(req,res,async (error)=>{
             try{
                 let file = await Post.findById({_id : req.params.id});
@@ -357,13 +378,22 @@ router.put('/edit-post/:id',authMiddleware,async (req,res) =>{
 router.delete('/delete-post/:id',authMiddleware,async (req,res) =>{
     try {
         let file = await Post.findById({_id : req.params.id});
-        fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
-            if(error){
-                console.log(error);
-                return
-                }
-            }   
-        );
+        const atts = [file.cover_path,file.audio_path,file.video_path];
+        atts.forEach(post_att =>{
+            if(post_att !== ""){
+                fs.unlink("./public/uploads/" + post_att, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return
+                        }
+                    }   
+                );
+            }
+        })
+
+        
+        
+
         await Post.deleteOne({_id: req.params.id});
         res.redirect('/dashboard');
     } catch (error) {
