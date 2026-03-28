@@ -244,6 +244,7 @@ input[type=submit]{
 
 
 .post img{
+    object-fit: cover;
     float: left;
     height: 200px;
     width:200px;

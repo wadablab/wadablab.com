@@ -235,12 +235,15 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
                 let newPost;
-                console.log(req.body.body);
+                console.log(req.body);
+                console.log(res.req.file);
+
                 newPost = new Post({
                     type:"blog-post",
                     title: req.body.title,
+                    body: req.body.body,
                     cover_path:(res.req.file ? res.req.file.filename : ""),
-                    body: req.body.body
+                    
                 })
                 await Post.create(newPost);
                 res.redirect("/dashboard");
@@ -256,7 +259,7 @@ router.post('/add-mini-jam',authMiddleware, async(req,res) =>{
     upload_cover_song(req,res,async (error)=>{
             try{
                 let newPost;
-                console.log(res.req.files[1].filename);
+                console.log(res.req.files);
                 newPost = new Post({
                     type:"mini-jam",
                     title: req.body.title,
