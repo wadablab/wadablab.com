@@ -398,6 +398,8 @@ input[type=submit]{
 }
 
 
+
+
 model-viewer{
     background-color: #ab6a7e;
     position : relative;
@@ -405,7 +407,11 @@ model-viewer{
     width: 500px;
 }
 
-
+@media(max-width: 800px){
+    model-viewer{
+        width: 100vw
+    }
+}
 
 
 
