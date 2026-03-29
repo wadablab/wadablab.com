@@ -287,6 +287,7 @@ router.get('/add-video-embed',authMiddleware,async (req,res) =>{
 router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
+                res.redirect("/dashboard");
                 let newPost;
                 console.log(req.body);
                 console.log(res.req.file);
