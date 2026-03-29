@@ -172,8 +172,6 @@ router.get('/add-blog-post',authMiddleware,async (req,res) =>{
             title: "ADD BLOG POST",
             description: "YUP"
         }
-
-
         res.render("admin/add-blog-post",{
             locals,
             layout: adminLayout
@@ -288,15 +286,11 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
                 let newPost;
-                console.log(req.body);
-                console.log(res.req.file);
-
                 newPost = new Post({
                     type:"blog-post",
                     title: req.body.title,
                     body: req.body.body,
                     cover_path: (res.req.file ? res.req.file.filename : ""),
-                    
                 })
                 await Post.create(newPost);
                 res.redirect("/dashboard");
