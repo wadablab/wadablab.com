@@ -46,7 +46,7 @@
     <article>
             <h1 class="article__title"><%= data.title %></h1>
             <% if (data.cover_path !== "") { %>
-                <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
+                 <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
             <%}%>
             <div class="article__video">
                 <video src="/uploads/<%- data.video_path %>" controls></video>

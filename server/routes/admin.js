@@ -563,7 +563,7 @@ router.get('/edit-video/:id',authMiddleware,async (req,res) =>{
 
 });
 
-/*GET ADMIN EDIT MINI JAM EMBED*/
+/*GET ADMIN EDIT VIDEO EMBED*/
 router.get('/edit-video-embed/:id',authMiddleware,async (req,res) =>{
 
     try {
@@ -693,7 +693,7 @@ router.put('/edit-mini-jam-embed/:id',authMiddleware,async (req,res) =>{
 
 /*PUT ADMIN EDIT VIDEO*/
 router.put('/edit-video/:id',authMiddleware,async (req,res) =>{
-    upload_cover_song(req,res,async (error)=>{
+    upload_cover_video(req,res,async (error)=>{
             try{
                 let file = await Post.findById({_id : req.params.id});
                 if (res.req.files.cover && file.cover_path !== ""){
@@ -704,7 +704,7 @@ router.put('/edit-video/:id',authMiddleware,async (req,res) =>{
                     }
                 });
                 }
-                if (res.req.files.video && file.audivideo_path !== ""){
+                if (res.req.files.video){
                     await fs.unlink("./public/uploads/" + file.video_path, (error)=>{
                     if(error){
                         console.log(error);
@@ -712,11 +712,11 @@ router.put('/edit-video/:id',authMiddleware,async (req,res) =>{
                     }
                 });
                 }
-                
+                console.log(res.req.files);
                 await Post.findByIdAndUpdate(req.params.id, {
                     title: req.body.title,
                     cover_path: (res.req.files.cover ? res.req.files.cover[0].filename : file.cover_path),
-                    audio_path: (res.req.files.video ? res.req.files.video[0].filename : file.video_path),
+                    video_path: (res.req.files.video ? res.req.files.video[0].filename : file.video_path),
                     body: req.body.body,
                     updatedAt: Date.now()
         });
