@@ -386,7 +386,7 @@ router.post('/add-mini-jam-embed',authMiddleware, async(req,res) =>{
     })
 });
 
-/*POST ADMIN CREATE NEW VIDEO*/
+/*POST ADMIN CREATE NEW VIDEO EMBED*/
 
 router.post('/add-video-embed',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
@@ -506,6 +506,28 @@ router.get('/edit-video/:id',authMiddleware,async (req,res) =>{
 
 
         res.render('admin/edit-video',{
+            locals,
+            data,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+/*GET ADMIN EDIT MINI JAM EMBED*/
+router.get('/edit-video-embed/:id',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals ={
+            title:"Edit Video",
+            description: "jesus"
+        }
+        const data = await Post.findOne({_id: req.params.id});
+
+
+        res.render('admin/edit-video-embed',{
             locals,
             data,
             layout: adminLayout
@@ -648,6 +670,25 @@ router.put('/edit-video/:id',authMiddleware,async (req,res) =>{
                     title: req.body.title,
                     cover_path: (res.req.files.cover ? res.req.files.cover[0].filename : file.cover_path),
                     audio_path: (res.req.files.video ? res.req.files.video[0].filename : file.video_path),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+
+});
+
+/*PUT ADMIN EDIT VIDEO EMBED*/
+router.put('/edit-video-embed/:id',authMiddleware,async (req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    youtube_link: (req.body.youtube_link !== "" ? req.body.youtube_link : file.youtube_link),
                     body: req.body.body,
                     updatedAt: Date.now()
         });
