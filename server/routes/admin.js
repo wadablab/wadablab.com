@@ -286,7 +286,6 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
                 let newPost;
-                console.log("1/n");
                 newPost = new Post({
                     type:"blog-post",
                     title: req.body.title,
