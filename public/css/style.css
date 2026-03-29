@@ -339,11 +339,13 @@ input[type=submit]{
 }
 
 .article__game{
-    width: 100%;
+    margin-bottom:50px;
 }
 
 .article__game iframe{
+    margin-bottom: 50px;
     float:right;
+    width: 100%;
 }
 
 /*FOOTER*/
