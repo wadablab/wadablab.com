@@ -295,7 +295,7 @@ router.post('/add-blog-post',authMiddleware, async(req,res) =>{
                     type:"blog-post",
                     title: req.body.title,
                     body: req.body.body,
-                    cover_path:(res.req.file ? res.req.file.filename : ""),
+                    cover_path: (res.req.file ? res.req.file.filename : ""),
                     
                 })
                 await Post.create(newPost);

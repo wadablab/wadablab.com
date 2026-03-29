@@ -301,6 +301,7 @@ input[type=submit]{
 
 .article{
     padding-bottom: 60px;
+    margin-bottom : 500px;
 }
 
 .article__body{
@@ -331,8 +332,10 @@ input[type=submit]{
     margin-right:10px
 }
 
-.article__youtube{
+.article__youtube iframe{
     float:left;
+    height:500px;
+    margin-right: 10px;
 }
 
 /*FOOTER*/
