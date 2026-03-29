@@ -49,7 +49,7 @@
                 <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
             <%}%>
             <div class="article__video">
-                <video src="/uploads/<%- data.video_path %>" controls></audio>
+                <video src="/uploads/<%- data.video_path %>" controls></video>
             </div>
             <div class="article__body"><%- data.body %></div>
         </article>
@@ -61,5 +61,16 @@
             <div class="article__body"><%- data.body %></div>
         </article>
 
+    <% break;
+    case "game" : %>
+        <h1 class="article__title"><%= data.title %></h1>
+            <% if (data.cover_path !== "") { %>
+                <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
+            <%}%>
+            <div class="article__game">
+                <iframe allowfullscreen src="/uploads/<%- data.game_path %>" frameborder="0"></iframe>
+            </div>
+            <div class="article__body"><%- data.body %></div>
+        </article>
     <% break;
 } %>

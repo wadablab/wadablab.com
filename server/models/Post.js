@@ -26,6 +26,10 @@ const PostSchema = new Schema({
         type: String,
         default:""
     },
+    game_path:{
+        type: String,
+        default:""
+    },
     insta_link:{
         type: String,
         defalut: ""
@@ -34,11 +38,11 @@ const PostSchema = new Schema({
         type: String,
         defalut: ""
     },
-    pinterest_link:{
+    youtube_link:{
         type: String,
         defalut: ""
     },
-    youtube_link:{
+    itch_link:{
         type: String,
         defalut: ""
     },

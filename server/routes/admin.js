@@ -12,6 +12,7 @@ const adminLayout = '../views/layouts/admin';
 const voidLayout = '../views/layouts/void';
 const jwtsecret = process.env.JWT_SECRET;
 
+let c = 0;
 /*move to middleware file */
 
 const storage = multer.diskStorage({
@@ -25,10 +26,23 @@ const storage = multer.diskStorage({
     }
 });
 
+const storage_game = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        let dest = "./public/uploads/" + c.toString();
+        fs.mkdirSync(dest, {recursive: true});
+        cb(null, dest);
+    },
+    filename: (req, file, cb)=>{
+        const ff=file;
+        let newFileName = ff.originalname;
+        cb(null,newFileName);
+    }
+});
 
 const upload_cover = multer({storage: storage}).single('cover');
 const upload_cover_song = multer({storage: storage}).fields([{name: 'cover'},{name: 'audio'}]);
 const upload_cover_video = multer({storage: storage}).fields([{name: 'cover'},{name: 'video'}]);
+const upload_game = multer({storage: storage_game}).any();
 
 /*ADMIN CHECK LOGIN*/
 
@@ -280,6 +294,24 @@ router.get('/add-video-embed',authMiddleware,async (req,res) =>{
 
 });
 
+/*GET ADMIN CREATE NEW GAME*/
+router.get('/add-game',authMiddleware,async (req,res) =>{
+
+    try {
+        const locals = {
+            title: "ADD GAME",
+            description: "YUP"
+        }
+        res.render("admin/add-game",{
+            locals,
+            layout: adminLayout
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
 /*POST ADMIN CREATE NEW BLOG POST */
 
 router.post('/add-blog-post',authMiddleware, async(req,res) =>{
@@ -334,6 +366,27 @@ router.post('/add-video',authMiddleware, async(req,res) =>{
                     video_path: req.files.video[0].filename,
                     body: req.body.body
                 })
+                await Post.create(newPost);
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
+
+/*POST ADMIN CREATE NEW GAME*/
+
+router.post('/add-game',authMiddleware, async(req,res) =>{
+    upload_game(req,res,async (error)=>{
+            try{
+                let newPost;
+                newPost = new Post({
+                    type:"game",
+                    title: req.body.title,
+                    game_path: c.toString() + "/index.html",
+                    body: req.body.body
+                })
+                c+=1;
                 await Post.create(newPost);
                 res.redirect("/dashboard");
             }catch(error){
@@ -736,10 +789,15 @@ router.delete('/delete-post/:id',authMiddleware,async (req,res) =>{
                 );
             }
         })
-
-        
-        
-
+        if(file.game_path !== ""){
+        let game = "./public/uploads/" + file.game_path
+        fs.rmdir(game.slice(0,game.length-11),{ recursive: true },(error)=>{
+                    if(error){
+                        console.log(error);
+                        return
+                        }
+                    } );
+        }
         await Post.deleteOne({_id: req.params.id});
         res.redirect('/dashboard');
     } catch (error) {

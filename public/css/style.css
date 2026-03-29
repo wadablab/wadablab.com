@@ -211,9 +211,9 @@ input[type=submit]{
     font-weight: 300;
     text-indent: 1rem;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp:3;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp:3;
+    line-clamp:3;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -241,7 +241,6 @@ input[type=submit]{
     margin-bottom:1.5rem;
     transition:0.1s;
 }
-
 
 .post img{
     object-fit: cover;
@@ -305,37 +304,46 @@ input[type=submit]{
 }
 
 .article__body{
+    text-indent: 1rem;
     font-weight:300;
     display:block;
 }
 
 .article__img{
-    float:left;
+    float:right;
     padding:10px;
 }
 
 .article__insta{
-    float:left;
+    float:right;
     width:330px;
     margin-right:10px
 }
 
 .article__soundcloud{
     width: 25vw;
-    float:left;
+    float:right;
     margin-right:10px;
 }
 
 .article__video video{
     max-height: 75vh;
-    float: left;
+    float: right;
     margin-right:10px
 }
 
 .article__youtube iframe{
-    float:left;
+    float:right;
     height:500px;
     margin-right: 10px;
+}
+
+.article__game{
+    width: 100%;
+}
+
+.article__game iframe{
+    float:right;
 }
 
 /*FOOTER*/
