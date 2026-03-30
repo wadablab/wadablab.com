@@ -141,7 +141,7 @@ router.get('/dashboard',authMiddleware,async (req,res) =>{
             description: "YUP"
         };
 
-        const data = await Post.find();
+        const data = await Post.find({});
         res.render("admin/dashboard",{
             locals,
             data,
