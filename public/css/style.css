@@ -281,18 +281,25 @@ input[type=submit]{
 
 @media(max-width: 800px){
     .post{
-        padding:0;
+        align-items: center;
+        padding:15px;
         margin:0;
         margin-bottom: 2.5rem;
     }
     .post img{
-        padding:0px;
+        margin:auto;
         height:auto;
-        width:50vw;
+        width:90%;
+    }
+    
+    .post:hover{
+        padding:0;
     }
     .post:hover img{
         height:auto;
-        width:100vw;
+        width:100%;
+        margin:0px;
+        padding:0;
         
 }
     
@@ -394,6 +401,9 @@ input[type=submit]{
     display: fixed;
     align-items:center;
 }
+
+/*ADMIN DASHBOARD*/
+
 
 
 /*ADD POST*/
