@@ -17,11 +17,14 @@ html:{
     min-height: 100vh;
 }
 body{
+    position: relative;
+    width : 100vw;
     font-family: "Lexend",sans-serif;
     color: var(--cream);
     font-size: var(--font-size-base);
     background-color: var(--gray);
     margin: 0;
+    padding:0;
 }
 
 a {
@@ -73,7 +76,7 @@ input[type=submit]{
 }
 
 .main{
-    padding: 20px 40px;
+    padding: 0;
     width:100% ;
     flex-shrink: 0;
     flex-grow: 1;
@@ -82,7 +85,6 @@ input[type=submit]{
 
 @media(max-width: 800px){
     .main{
-        padding:10px 10px;
         margin: 0;
     }
 }
@@ -284,9 +286,9 @@ input[type=submit]{
         margin-bottom: 2.5rem;
     }
     .post img{
-        padding:0;
+        padding:0px;
         height:auto;
-        width:100vw;
+        width:50vw;
     }
     .post:hover img{
         height:auto;
@@ -397,15 +399,17 @@ input[type=submit]{
 /*ADD POST*/
 
 .add-post-elements{
+    padding:0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr; 
     grid-column-gap: 60px;
     height : 60vh;
-    margin: 35px;
+    margin: 30px 0px;
 }
 
 .add-post-element{
     text-align: center;
+
     margin:10px;
     background: var(--gray);
     filter: drop-shadow(0px 0px 5px #00000090);
@@ -436,10 +440,10 @@ input[type=submit]{
 @media(max-width: 800px){
     .add-post-elements{
         position: absolute;
-        left: 0;
-        width: 100vw;
+        left: 0px;
+        width: 100%;
         white-space: nowrap;
-        overflow-x: auto;
+        overflow-x:  scroll;
     }
 }
 
