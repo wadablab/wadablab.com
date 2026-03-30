@@ -10,8 +10,13 @@
     --font-size-base: 1rem;
 }
 
-body{
+
+html:{
+    max-width:100%;
+    overflow-x: hidden; 
     min-height: 100vh;
+}
+body{
     font-family: "Lexend",sans-serif;
     color: var(--cream);
     font-size: var(--font-size-base);
@@ -69,6 +74,7 @@ input[type=submit]{
 
 .main{
     padding: 20px 40px;
+    width:100% ;
     flex-shrink: 0;
     flex-grow: 1;
 
@@ -98,6 +104,7 @@ input[type=submit]{
 
 .header__logo{
     display: flex;
+    width: 100%;
     justify-content: center;
     text-decoration: none;
     background: var(--red);
@@ -426,8 +433,18 @@ input[type=submit]{
     
 }
 
+@media(max-width: 800px){
+    .add-post-elements{
+        position: absolute;
+        left: 0;
+        width: 100vw;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+}
 
 
+/*WEB EXPERIMENTS*/
 
 model-viewer{
     background-color: #ab6a7e;
@@ -438,7 +455,10 @@ model-viewer{
 
 @media(max-width: 800px){
     model-viewer{
-        width: 100vw
+        position: absolute;
+        left:0;
+        right: 0;
+        width: 100vw;
     }
 }
 
