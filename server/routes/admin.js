@@ -42,7 +42,7 @@ const storage_game = multer.diskStorage({
 const upload_cover = multer({storage: storage}).single('cover');
 const upload_cover_song = multer({storage: storage}).fields([{name: 'cover'},{name: 'audio'}]);
 const upload_cover_video = multer({storage: storage}).fields([{name: 'cover'},{name: 'video'}]);
-const upload_game = multer({storage: storage_game}).any();
+const upload_game = multer({storage: storage_game}).fields([{name: 'cover'},{name: 'game'}]);
 
 /*ADMIN CHECK LOGIN*/
 
@@ -383,6 +383,7 @@ router.post('/add-game',authMiddleware, async(req,res) =>{
                 newPost = new Post({
                     type:"game",
                     title: req.body.title,
+                    cover_path: c.toString() + "/cover.png",
                     game_path: c.toString() + "/index.html",
                     body: req.body.body
                 })

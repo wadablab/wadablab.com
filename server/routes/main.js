@@ -96,9 +96,37 @@ router.post('/search', async(req,res) =>{
     }
 })
 
-router.get('/games',(req,res) =>{
-    res.render('games');
+router.get('/:type',async (req,res) =>{
+    try {
+        const locals = {
+        title:"wadablab.com",
+        description: "where worms can feel at home"
+        }
+        let perPage = 5;
+        let page = req.query.page || 1;
+
+        const data = await Post.aggregate([{$sort:{createdAt: -1}},{$match:{type: req.params.type}}])
+        .skip(perPage*page-perPage)
+        .limit(perPage)
+        .exec();
+
+        const count = await Post.countDocuments();
+        const nextPage = parseInt(page) +1;
+        const hasNextPage = nextPage <= Math.ceil(count/perPage);
+
+
+
+        res.render('index', {
+            locals,
+            data,
+            current: page,
+            nextPage: hasNextPage? nextPage : null
+        });
+    } catch (error) {
+    console.log(error);
+} 
 });
+
 
 router.get('/art',(req,res) =>{
     res.render('art');
