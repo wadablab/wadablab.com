@@ -68,7 +68,7 @@ input[type=submit]{
 }
 
 .main{
-    padding: 0px 40px;
+    padding: 20px 40px;
     flex-shrink: 0;
     flex-grow: 1;
 
@@ -76,7 +76,7 @@ input[type=submit]{
 
 @media(max-width: 800px){
     .main{
-        padding:0 0;
+        padding:10px 10px;
         margin: 0;
     }
 }
@@ -159,7 +159,13 @@ input[type=submit]{
     transition: 0.3s;
 }
 
-
+@media(max-width: 800px){
+    .header{
+        overflow-x: auto;
+        white-space: nowrap;
+        display: flex;
+    }
+}
 
 .searchBar{
     position: absolute;

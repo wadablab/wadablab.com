@@ -614,6 +614,8 @@ router.put('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
 
 });
 
+
+
 /*PUT ADMIN EDIT BLOG POST EMBED*/
 router.put('/edit-blog-post-embed/:id',authMiddleware,async (req,res) =>{
     upload_cover(req,res,async (error)=>{
@@ -737,6 +739,42 @@ router.put('/edit-video-embed/:id',authMiddleware,async (req,res) =>{
                 await Post.findByIdAndUpdate(req.params.id, {
                     title: req.body.title,
                     youtube_link: (req.body.youtube_link !== "" ? req.body.youtube_link : file.youtube_link),
+                    body: req.body.body,
+                    updatedAt: Date.now()
+        });
+                res.redirect("/dashboard");
+            }catch(error){
+                console.log(error);
+            }
+    })
+
+});
+
+/*PUT ADMIN EDIT GAME*/
+router.put('/edit-game/:id',authMiddleware,async (req,res) =>{
+    upload_game(req,res,async (error)=>{
+            try{
+                let file = await Post.findById({_id : req.params.id});
+                if (res.req.files.cover && file.cover_path !== ""){
+                    await fs.unlink("./public/uploads/" + file.cover_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                if (res.req.files.game){
+                    await fs.unlink("./public/uploads/" + file.game_path, (error)=>{
+                    if(error){
+                        console.log(error);
+                        return;
+                    }
+                });
+                }
+                await Post.findByIdAndUpdate(req.params.id, {
+                    title: req.body.title,
+                    cover_path: (res.req.files.cover ? res.req.files.cover[0].filename : file.cover_path),
+                    game_path: (res.req.files.game ? res.req.files.game[0].filename : file.video_path),
                     body: req.body.body,
                     updatedAt: Date.now()
         });
