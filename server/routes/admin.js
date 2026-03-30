@@ -12,7 +12,7 @@ const adminLayout = '../views/layouts/admin';
 const voidLayout = '../views/layouts/void';
 const jwtsecret = process.env.JWT_SECRET;
 
-let c = 0;
+let c = 1;
 /*move to middleware file */
 
 const storage = multer.diskStorage({

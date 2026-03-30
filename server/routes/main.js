@@ -94,7 +94,16 @@ router.post('/search', async(req,res) =>{
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+router.get('/experiments',async (req,res) =>{
+    try{
+        res.render('experiments',{});
+    }
+    catch(error){
+        console.log(error);
+    }
+});
 
 router.get('/:type',async (req,res) =>{
     try {
@@ -127,10 +136,6 @@ router.get('/:type',async (req,res) =>{
 } 
 });
 
-
-router.get('/art',(req,res) =>{
-    res.render('art');
-});
 
 
 module.exports = router;
