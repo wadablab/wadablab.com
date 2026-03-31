@@ -37,7 +37,7 @@
                     <a href="/edit-video-embed/<%= post._id %>" class = "btn">Edit Youtube Post</a>
                 <% break;
                 case "game" :%>
-                    <a href="/edit-game<%= post._id %>" class = "btn">Edit Game</a>
+                    <a href="/edit-game/<%= post._id %>" class = "btn">Edit Game</a>
                 <% break;
             }%>
             <form action="/delete-post/<%= post._id %>?_method=DELETE" method="POST">

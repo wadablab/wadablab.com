@@ -21,7 +21,7 @@
     <% break;
 
     case "mini-jam" :%>
-        <article>
+        <article class="article">
             <h1 class="article__title"><%= data.title %></h1>
             <% if (data.cover_path !== "") { %>
                 <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
@@ -42,7 +42,7 @@
 
     <% break;
     case "video" : %>
-    <article>
+        <article class="article">
             <h1 class="article__title"><%= data.title %></h1>
             <% if (data.cover_path !== "") { %>
                  <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
@@ -62,7 +62,8 @@
 
     <% break;
     case "game" : %>
-        <h1 class="article__title"><%= data.title %></h1>
+        <article class="article">
+            <h1 class="article__title"><%= data.title %></h1>
             <% if (data.cover_path !== "") { %>
                 <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
             <%}%>

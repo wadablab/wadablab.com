@@ -362,11 +362,11 @@ input[type=submit]{
 }
 
 .article__game{
-    margin-bottom:50px;
+    margin-bottom:10px;
 }
 
 .article__game iframe{
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     float:right;
     width: 100%;
 }
@@ -389,8 +389,21 @@ input[type=submit]{
     }
     
     .article__audio{
-        float:none;        
+        padding:0;
+        display:table;
+        float: none;
+        margin : auto;
     }
+    .article__video{
+        display: table;
+        padding:0;
+        margin:auto;
+    }
+    .article__video video{
+        float:none;
+        margin: auto;
+    }
+    
 }
 
 /*FOOTER*/
