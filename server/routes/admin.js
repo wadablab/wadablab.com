@@ -858,8 +858,6 @@ router.delete('/delete-post/:id',authMiddleware,async (req,res) =>{
 
 
 
-
-
 /*GET ADMIN LOGOUT */
 router.get('/logout',(req,res) =>{
     try {

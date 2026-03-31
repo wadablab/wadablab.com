@@ -11,7 +11,7 @@
 }
 
 
-html:{
+html{
     max-width:100%;
     overflow-x: hidden; 
     min-height: 100vh;
@@ -323,7 +323,7 @@ input[type=submit]{
 
 .article{
     padding: 30px;
-    margin-bottom : 500px;
+    margin-bottom : 50px;
 }
 
 .article__body{
@@ -369,6 +369,28 @@ input[type=submit]{
     margin-bottom: 50px;
     float:right;
     width: 100%;
+}
+
+.article__audio {
+    float: right;
+    padding:10px;
+}
+
+@media(max-width: 800px){
+    .article{
+        padding: 10px;
+    }
+    .article__img{
+        float: none;
+        width:100%;
+        height:auto;
+        padding:0;
+        margin: 0;
+    }
+    
+    .article__audio{
+        float:none;        
+    }
 }
 
 /*FOOTER*/
@@ -464,15 +486,14 @@ input[type=submit]{
 model-viewer{
     background-color: #ab6a7e;
     position : relative;
+    margin: auto;
     height: 500px;
     width: 500px;
 }
 
 @media(max-width: 800px){
     model-viewer{
-        position: absolute;
-        left:0;
-        right: 0;
+        position: relative;
         width: 100vw;
     }
 }

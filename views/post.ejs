@@ -4,12 +4,11 @@
     case "blog-post" :%>
         <article class = "article">
             <h1 class="article__title"><%= data.title %></h1>
-            <div class="article__body">
+            
             <% if (data.cover_path !== "") { %>
                 <img class="article__img"src="/uploads/<%= data.cover_path %>" height="200" alt="">
             <%}%>
-                <%- data.body %>
-            </div>
+            <div class="article__body"><%- data.body %></div>
         </article>
 
     <% break;
