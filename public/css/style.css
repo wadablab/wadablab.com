@@ -213,6 +213,7 @@ input[type=submit]{
 /*HOMEPAGE ARTICLES*/
 .articles{
     align-content: center;
+    padding : 20px;
 }
 
 
@@ -321,7 +322,7 @@ input[type=submit]{
 
 
 .article{
-    padding-bottom: 60px;
+    padding: 30px;
     margin-bottom : 500px;
 }
 
