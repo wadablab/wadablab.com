@@ -83,7 +83,7 @@ input[type=submit]{
 
 }
 
-@media(max-width: 800px){
+@media(max-width: 700px){
     .main{
         margin: 0;
     }
@@ -168,7 +168,7 @@ input[type=submit]{
     transition: 0.3s;
 }
 
-@media(max-width: 800px){
+@media(max-width: 700px){
     .header{
         overflow-x: auto;
         white-space: nowrap;
@@ -280,7 +280,7 @@ input[type=submit]{
     transition: 0.1s;
 }
 
-@media(max-width: 800px){
+@media(max-width: 700px){
     .post{
         align-items: center;
         padding:15px;
@@ -376,7 +376,7 @@ input[type=submit]{
     padding:10px;
 }
 
-@media(max-width: 800px){
+@media(max-width: 700px){
     .article{
         padding: 10px;
     }
@@ -483,7 +483,7 @@ input[type=submit]{
     
 }
 
-@media(max-width: 800px){
+@media(max-width: 700px){
     .add-post-elements{
         position: absolute;
         left: 0px;
@@ -504,10 +504,14 @@ model-viewer{
     width: 500px;
 }
 
-@media(max-width: 800px){
+.experiments{
+    padding:10px;
+}
+
+@media(max-width: 700px){
     model-viewer{
         position: relative;
-        width: 100vw;
+        width: 100%;
     }
 }
 
