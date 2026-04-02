@@ -56,14 +56,10 @@ input[type=submit]{
     font-family: "Lexend",sans-serif;
     color: var(--cream);
     text-decoration: none;
-    margin: 4px 2px;
+    margin: 20px 2px;
     cursor: pointer;
 }
 
-.btn-delete{
-    padding: 16px 32px;
-    background-color: red;
-}
 
 /*LAYOUT*/
 
@@ -221,6 +217,7 @@ input[type=submit]{
     display: block;
     font-size: 2.5rem;
     text-decoration: none;
+    margin-bottom : 20px;
 }
 
 .article-list__preview{
@@ -440,7 +437,64 @@ input[type=submit]{
 
 /*ADMIN DASHBOARD*/
 
+.admin-title{
+    margin-bottom : 25px;
+}
 
+.admin-posts{
+    list-style-type: none;
+    padding: 20px;
+}
+
+.admin-post{
+    text-decoration: none;
+    display: block;
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-direction: column;
+    filter: drop-shadow(0px 0px 5px #00000090);
+    background: var(--gray);
+    padding: 1.5rem;
+    margin-bottom:1.5rem;
+    transition:0.1s;
+}
+
+.admin-post a{
+    text-decoration: none;
+}
+
+.admin-post img{
+    object-fit: cover;
+    float: left;
+    height: 200px;
+    width:200px;
+    padding: 15px;
+    transition: 0.1s;
+}
+
+
+
+.admin-post:hover{
+    filter: drop-shadow(0px 0px 5px #000000c0);
+    font-size: 1.2rem;
+    transition: 0.1s;
+}
+.admin-post:hover img{
+    height:220px;
+    width:220px;
+    transition: 0.1s;
+}
+
+.admin-post-controls{
+    float: right;
+    text-align: right;
+}
+
+.admin-post-controls a{
+    background: var(--red);
+    padding: 0;
+}
 
 /*ADD POST*/
 

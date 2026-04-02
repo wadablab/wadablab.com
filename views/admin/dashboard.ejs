@@ -1,15 +1,41 @@
-<div class="admin-title">
+
+
+<ul class="admin-posts">
+    <div class="admin-title">
     <h2>Posts</h2>
     <a href="/add-post" class="btn">+ Add New</a>
 </div>
 
-<ul class="admin-post">
 
     <% data.forEach(post => { %>
      <li>
-        <a href="/post/<%= post._id %>">
-            <%= post.title %> &nearr;
-        </a>
+        <div class="admin-post">
+                <a href="/post/<%= post._id %>">
+                    <% switch(post.type){
+                        case "blog-post-embed": %>
+                            <img class="article-list__img"src="/img/insta-post.png"alt="">
+                    <% break;
+                        case "mini-jam-embed": %>
+                            <img class="article-list__img"src="/img/soundcloud-post.png"alt="">
+                    <% break;
+                        case "video-embed": %>
+                            <img class="article-list__img"src="/img/youtube-post.png"alt="">
+                    <% break;
+                        default : 
+                            if(post.cover_path == ""){%>
+                                <img class="article-list__img"src="/img/no_image.png"alt="">
+                              <%} else {%>
+                                <img class="article-list__img"src="/uploads/<%= post.cover_path  %>"alt="">
+                              <%} %>  
+                    <% break;
+                    } %>
+
+                    <span class="article-list__title"><%= post.title %></span>
+                    <span class="article-list__preview">
+                        <%#post.body %>
+                    </span>
+                    <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
+                </a>  
         <div class="admin-post-controls">
             <% switch (post.type) {
                 case "blog-post" :%>
@@ -44,6 +70,8 @@
                 <input type="submit" value="Delete" class="btn">
             </form>
         </div>
+        </div>
+        
      </li>
     <% }) %>
 </ul> 
