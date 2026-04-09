@@ -13,7 +13,6 @@ const voidLayout = '../views/layouts/void';
 const jwtsecret = process.env.JWT_SECRET;
 
 let c = 1;
-/*move to middleware file */
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) =>{
@@ -136,16 +135,42 @@ router.get('/uh-oh',async(req,res)=>{
 router.get('/dashboard',authMiddleware,async (req,res) =>{
 
     try {
-        const locals = {
-            title: "Dashboard",
-            description: "YUP"
-        };
+        // const locals = {
+        //     title: "Dashboard",
+        //     description: "YUP"
+        // };
 
-        const data = await Post.find({});
-        res.render("admin/dashboard",{
+        // const data = await Post.find({});
+        // res.render("admin/dashboard",{
+        //     locals,
+        //     data,
+        //     layout: adminLayout
+        // });
+        const locals = {
+            title:"wadablab.com",
+            description: "where worms can feel at home"
+        }
+        let perPage = 5;
+        let page = req.query.page || 1;
+
+        const data = await Post.aggregate([{$sort:{createdAt: -1}}])
+        .skip(perPage*page-perPage)
+        .limit(perPage)
+        .exec();
+
+        const count = await Post.countDocuments();
+        const nextPage = parseInt(page) +1;
+        const hasNextPage = nextPage <= Math.ceil(count/perPage);
+        const prevPage = parseInt(page) -1;
+        const hasPrevPage = parseInt(page) > 1;
+
+
+        res.render('admin/dashboard', {
             locals,
             data,
-            layout: adminLayout
+            current: page,
+            nextPage: hasNextPage? nextPage : null,
+            prevPage: hasPrevPage? prevPage : null
         });
 
 

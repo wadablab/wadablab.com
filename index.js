@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo').default;
 const session = require("express-session");
 const connectDB = require('./server/config/db');
+const { redirect } = require('express/lib/response');
 
 
 const app = express();
@@ -31,7 +32,7 @@ app.use(session({
 
 
 
-app.use(express.static('public'));
+app.use(express.static('public',{redirect: false}));
 
 //Templating Engine
 app.use(expressLayout);

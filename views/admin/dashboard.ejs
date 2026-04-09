@@ -75,3 +75,9 @@
      </li>
     <% }) %>
 </ul> 
+<% if (nextPage !== null) { %>
+        <a href="/dashboard/?page=<%= nextPage %>" class="pagination_before">&lt; View Older Posts</a>
+    <% } %>
+    <% if (prevPage !== null) { %>
+        <a href="/dashboard/?page=<%= prevPage %>" class="pagination_after">View Recent Posts &gt;</a>
+    <% } %>

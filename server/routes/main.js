@@ -12,7 +12,7 @@ router.get('',async (req,res) =>{
         title:"wadablab.com",
         description: "where worms can feel at home"
         }
-        let perPage = 8;
+        let perPage = 5;
         let page = req.query.page || 1;
 
         const data = await Post.aggregate([{$sort:{createdAt: -1}}])
@@ -23,14 +23,17 @@ router.get('',async (req,res) =>{
         const count = await Post.countDocuments();
         const nextPage = parseInt(page) +1;
         const hasNextPage = nextPage <= Math.ceil(count/perPage);
-
+        const prevPage = parseInt(page) -1;
+        const hasPrevPage = parseInt(page) > 1;
 
 
         res.render('index', {
             locals,
             data,
+            type : "",
             current: page,
-            nextPage: hasNextPage? nextPage : null
+            nextPage: hasNextPage? nextPage : null,
+            prevPage: hasPrevPage? prevPage : null
         });
     } catch (error) {
     console.log(error);
@@ -119,17 +122,23 @@ router.get('/:type',async (req,res) =>{
         .limit(perPage)
         .exec();
 
-        const count = await Post.countDocuments();
+        const count = (await Post.aggregate([{$match:{type: req.params.type}}])).length;
         const nextPage = parseInt(page) +1;
+        console.log(count);
         const hasNextPage = nextPage <= Math.ceil(count/perPage);
+        const prevPage = parseInt(page) -1;
+        const hasPrevPage = parseInt(page) > 1;
+
 
 
 
         res.render('index', {
             locals,
             data,
+            type: req.params.type ? req.params.type : "",
             current: page,
-            nextPage: hasNextPage? nextPage : null
+            nextPage: hasNextPage? nextPage : null,
+            prevPage: hasPrevPage? prevPage : null
         });
     } catch (error) {
     console.log(error);

@@ -277,6 +277,14 @@ input[type=submit]{
     transition: 0.1s;
 }
 
+.pagination_before{
+    float:left;
+}
+.pagination_after{
+    float:right;
+}
+
+
 @media(max-width: 700px){
     .post{
         align-items: center;
