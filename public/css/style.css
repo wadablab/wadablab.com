@@ -580,7 +580,13 @@ model-viewer{
     }
 }
 
+/*PORTFOLIO*/
 
+.portfolio{
+    width : 25%;
+    padding : 40px
+     
+}
 
 
 
