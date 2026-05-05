@@ -108,6 +108,15 @@ router.get('/experiments',async (req,res) =>{
     }
 });
 
+router.get('/portfolio',async (req,res) =>{
+    try{
+        res.render('portfolio',{});
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
 router.get('/:type',async (req,res) =>{
     try {
         const locals = {
