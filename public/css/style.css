@@ -588,6 +588,12 @@ model-viewer{
      
 }
 
+@media(max-width: 700px){
+    .portfolio{
+        width: 95%;
+        padding : 2.5%;
+    }
+}
 
 
 
