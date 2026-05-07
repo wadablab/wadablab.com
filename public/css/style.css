@@ -582,9 +582,12 @@ model-viewer{
 
 /*PORTFOLIO*/
 
+.portfolio_cont{
+    text-align: center;
+}
 .portfolio{
     width : 25%;
-    padding : 40px
+    padding : 40px;
      
 }
 
