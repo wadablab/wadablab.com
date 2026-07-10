@@ -1,7 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const Post = require("../models/Post");
+const User = require("../models/User");
+const Drawing = require("../models/Drawing");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 
+const adminLayout = '../views/layouts/admin';
+const voidLayout = '../views/layouts/void';
+const jwtsecret = process.env.JWT_SECRET;
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, "./public/uploads");
+    },
+    filename: (req, file, cb)=>{
+        const ff=file;
+        let newFileName = Date.now() + ff.originalname;
+        cb(null,newFileName);
+    }
+});
+
+
+const upload_cover = multer({storage: storage}).single('cover');
 
 //Routes
 
@@ -117,6 +142,15 @@ router.get('/portfolio',async (req,res) =>{
     }
 });
 
+router.get('/gallery',async (req,res) =>{
+    try{
+        res.render('gallery',{});
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
 router.get('/:type',async (req,res) =>{
     try {
         const locals = {
@@ -155,5 +189,22 @@ router.get('/:type',async (req,res) =>{
 });
 
 
+/*POST CREATE NEW DRAWING */
+
+router.post('/gallery', async(req,res) =>{
+    upload_cover(req,res,async (error)=>{
+            try{
+                let newDrawing;
+                newDrawing = new Drawing({
+                    title: req.body.title,
+                    cover_path: ""
+                })
+                await Drawing.create(newDrawing);
+                res.redirect("/index");
+            }catch(error){
+                console.log(error);
+            }
+    })
+});
 
 module.exports = router;

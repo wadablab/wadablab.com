@@ -612,15 +612,31 @@ model-viewer{
     }
 }
 
+
+/*GALLERY*/
+.gallery{
+    padding: 0px;
+}
+
+.canvas{
+    text-align: center;
+}
+
+.canvas canvas{
+      border: 2px solid var(--cream);
+}
+
+
+
 /*PORTFOLIO*/
 
 .portfolio_cont{
     text-align: center;
 }
+
 .portfolio{
     width : 25%;
     padding : 40px;
-     
 }
 
 @media(max-width: 700px){

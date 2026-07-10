@@ -1,0 +1,61 @@
+<div class = "gallery">
+
+    <h1>ART GALLERY</h1>
+    <div class = "canvas">
+        <canvas id="myCanvas" width="700" height="400"></canvas>
+        <button id="clearButton">Clear</button>
+    </div>
+    <form action="/gallery" method="POST" enctype="multipart/form-data">
+        <label for="body"><h2>Title</h2></label>
+        <textarea name="title" placeholder="Blog your heart out" cols="20" rows="1"></textarea>
+        
+        <input type="submit" value="POST" class="btn">
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    const canvas = document.getElementById("myCanvas");
+    const context = canvas.getContext("2d");
+    let isDrawing = false;
+    function startDrawing(event) {
+        isDrawing = true;
+        draw(event);
+    }
+    function draw(event) {
+        if (!isDrawing) return;
+        const x = event.clientX - canvas.offsetLeft;
+        const y = event.clientY - canvas.offsetTop;
+        context.lineTo(x, y);
+        context.stroke();
+    }
+    function stopDrawing() {
+        isDrawing = false;
+        context.beginPath();
+    }
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
+    const clearButton = document.getElementById("clearButton");
+    clearButton.addEventListener("click", function() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    });
+</script>

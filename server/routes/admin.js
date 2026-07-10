@@ -479,6 +479,9 @@ router.post('/add-video-embed',authMiddleware, async(req,res) =>{
 });
 
 
+
+
+
 /*GET ADMIN EDIT BLOG POST */
 router.get('/edit-blog-post/:id',authMiddleware,async (req,res) =>{
 
