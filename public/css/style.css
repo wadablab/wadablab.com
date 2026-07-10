@@ -12,11 +12,13 @@
 
 
 html{
+    
     max-width:100%;
     overflow-x: hidden; 
     min-height: 100vh;
 }
 body{
+    cursor: url("img/cursor.png"), auto;
     position: relative;
     width : 100vw;
     font-family: "Lexend",sans-serif;
@@ -415,8 +417,18 @@ input[type=submit]{
 .footer{
     filter: drop-shadow(0px -5px 5px #00000050);
     background-color:var(--red);
+}
+
+.footer_gif{
     text-align: center;
 }
+
+
+.footer_text{
+    text-align: center;
+}
+
+
 
 /*ADMIN LOGIN*/
 .void__body{
@@ -565,8 +577,8 @@ model-viewer{
     background-color: #ab6a7e;
     position : relative;
     margin: auto;
-    height: 500px;
-    width: 500px;
+    height: 900px;
+    width: 900px;
 }
 
 .experiments{
