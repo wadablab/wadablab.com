@@ -8,7 +8,7 @@
     --black:#000000;
     --unemph_text: #ab6a7e;
     --font-size-base: 1rem;
-    cursor: url("img/cursor.png");
+    
 }
 
 
@@ -19,7 +19,7 @@ html{
     min-height: 100vh;
 }
 body{
-    
+    cursor: url("img/cursor.png");
     position: relative;
     width : 100vw;
     font-family: "Lexend",sans-serif;
@@ -599,10 +599,13 @@ model-viewer{
 }
 .experiment_2 .jspaint iframe{
     height: 700px;
-    width : 1000px
+    width : 100%;
 }
 
 @media(max-width: 700px){
+    .experiment_1, .experiment_2{
+        padding:0px;
+    }   
     model-viewer{
         position: relative;
         width: 100%;
