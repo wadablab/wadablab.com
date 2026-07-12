@@ -54,8 +54,8 @@
         event.preventDefault();
         if (!isDrawing) return;
         console.log("yayo");
-        const x = event.pageX - BB.left;
-        const y = event.pageY - BB.top;
+        const x = event.changedTouches[0].pageX - BB.left;
+        const y = event.changedTouches[0].pageY - BB.top;
         context.lineTo(x, y);
         context.stroke();
     }
