@@ -6,14 +6,14 @@
     <h1 id="h1">ART GALLERY</h1>
 
     <div class = "canvas">
-        <canvas id="myCanvas" width="700" height="400"></canvas>
+        <canvas id="myCanvas"></canvas>
         <button id="clearButton">Clear</button>
     </div>
     <form action="/gallery" method="POST" enctype="multipart/form-data">
         <label for="title"><h2>Title</h2></label>
         <textarea  id = "title" name="title" placeholder="Blog your heart out" cols="20" rows="1"></textarea>
 
-        <input  id = "cover_path" type="hidden" name="cover_path" value="fuck off">
+        <input  id = "cover_path" type="hidden" name="cover_path" value="">
 
         <input id = "postButton" type="submit" value="POST" class="btn">
     </form>
@@ -44,19 +44,23 @@
     const context = canvas.getContext("2d");
     const BB = canvas.getBoundingClientRect();
     let isDrawing = false;
+
     function startDrawing(event) {
+        event.preventDefault();
         isDrawing = true;
         draw(event);
     }
     function draw(event) {
+        event.preventDefault();
         if (!isDrawing) return;
-        
+        console.log("yayo");
         const x = event.pageX - BB.left;
         const y = event.pageY - BB.top;
         context.lineTo(x, y);
         context.stroke();
     }
     function stopDrawing() {
+        event.preventDefault();
         isDrawing = false;
         context.beginPath();
     }
@@ -86,6 +90,12 @@
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener("mouseup", stopDrawing);
     canvas.addEventListener("mouseout", stopDrawing);
+
+    canvas.addEventListener("touchstart", startDrawing);
+    canvas.addEventListener("touchend", stopDrawing);
+    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchout", stopDrawing);
+
     const clearButton = document.getElementById("clearButton");
     const postButton = document.getElementById("postButton");
     clearButton.addEventListener("click", function() {
