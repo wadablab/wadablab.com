@@ -144,7 +144,15 @@ router.get('/portfolio',async (req,res) =>{
 
 router.get('/gallery',async (req,res) =>{
     try{
-        res.render('gallery',{});
+        const locals = {
+            title:"wadablab.com",
+            description: "where worms can feel at home"
+        }
+        const data = await Drawing.aggregate([{$sort:{createdAt: -1}}]).exec();
+        res.render('gallery',{
+            locals,
+            data
+        });
     }
     catch(error){
         console.log(error);
@@ -194,13 +202,15 @@ router.get('/:type',async (req,res) =>{
 router.post('/gallery', async(req,res) =>{
     upload_cover(req,res,async (error)=>{
             try{
+                
                 let newDrawing;
                 newDrawing = new Drawing({
                     title: req.body.title,
-                    cover_path: ""
+                    cover_path: req.body.cover_path,
+                    createdAt: Date.now(),
                 })
                 await Drawing.create(newDrawing);
-                res.redirect("/index");
+                res.redirect("/gallery");
             }catch(error){
                 console.log(error);
             }

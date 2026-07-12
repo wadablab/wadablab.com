@@ -1,28 +1,36 @@
-<div class = "gallery">
+
+
+
+<div class = "gallery-1">
 
     <h1>ART GALLERY</h1>
+
     <div class = "canvas">
         <canvas id="myCanvas" width="700" height="400"></canvas>
         <button id="clearButton">Clear</button>
     </div>
     <form action="/gallery" method="POST" enctype="multipart/form-data">
-        <label for="body"><h2>Title</h2></label>
-        <textarea name="title" placeholder="Blog your heart out" cols="20" rows="1"></textarea>
-        
-        <input type="submit" value="POST" class="btn">
+        <label for="title"><h2>Title</h2></label>
+        <textarea  id = "title" name="title" placeholder="Blog your heart out" cols="20" rows="1"></textarea>
+
+        <input  id = "cover_path" type="hidden" name="cover_path" value="fuck off">
+
+        <input id = "postButton" type="submit" value="POST" class="btn">
     </form>
 </div>
 
 
+<div class="gallery-2">
+    <% data.forEach(drawing => { %>
+        
+        <div class= "gallery_elt">
+            <img src=<%= drawing.cover_path %> alt="">
+            <p><%= drawing.title %></p>
+        </div>
+        
 
-
-
-
-
-
-
-
-
+    <% }) %>
+</div>
 
 
 
@@ -34,6 +42,7 @@
 <script>
     const canvas = document.getElementById("myCanvas");
     const context = canvas.getContext("2d");
+    const BB = canvas.getBoundingClientRect();
     let isDrawing = false;
     function startDrawing(event) {
         isDrawing = true;
@@ -41,8 +50,9 @@
     }
     function draw(event) {
         if (!isDrawing) return;
-        const x = event.clientX - canvas.offsetLeft;
-        const y = event.clientY - canvas.offsetTop;
+        
+        const x = event.clientX - BB.left;
+        const y = event.clientY - BB.top ;
         context.lineTo(x, y);
         context.stroke();
     }
@@ -50,12 +60,37 @@
         isDrawing = false;
         context.beginPath();
     }
+
+    let cover_path = "";
+
+    function upload() {
+        
+        try{
+            const locals = {
+                title:"wadablab.com",
+                description: "where worms can feel at home"
+             }   
+            const title = document.getElementById("title");
+            cover_path = canvas.toDataURL("image/png");
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            const body = document.getElementById("cover_path");
+            body.value = cover_path;
+            console.log(body.value);
+
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+
     canvas.addEventListener("mousedown", startDrawing);
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener("mouseup", stopDrawing);
     canvas.addEventListener("mouseout", stopDrawing);
     const clearButton = document.getElementById("clearButton");
+    const postButton = document.getElementById("postButton");
     clearButton.addEventListener("click", function() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
     });
+    postButton.addEventListener("click", upload);
 </script>
