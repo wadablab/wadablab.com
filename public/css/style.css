@@ -623,7 +623,7 @@ model-viewer{
 }
 
 .canvas canvas{
-      border: 20px solid var(--cream);
+    border: 5px solid var(--cream);
 }
 
 .gallery-2{
@@ -638,7 +638,7 @@ model-viewer{
 }
 
 .gallery_elt img{
-    border: 10px solid var(--cream);
+    border: 5px solid var(--cream);
 }
 
 /*PORTFOLIO*/
