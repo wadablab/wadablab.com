@@ -53,10 +53,19 @@
     function draw(event) {
         event.preventDefault();
         if (!isDrawing) return;
-        console.log("yayo");
+        const x = event.pageX - BB.left;
+        const y = event.pageY - BB.top;
+        context.lineTo(x, y);
+       
+        context.stroke();
+    }
+    function draw_phone(event) {
+        event.preventDefault();
+        if (!isDrawing) return;
         const x = event.changedTouches[0].pageX - BB.left;
         const y = event.changedTouches[0].pageY - BB.top;
         context.lineTo(x, y);
+       
         context.stroke();
     }
     function stopDrawing() {
@@ -93,7 +102,7 @@
 
     canvas.addEventListener("touchstart", startDrawing);
     canvas.addEventListener("touchend", stopDrawing);
-    canvas.addEventListener("touchmove", draw);
+    canvas.addEventListener("touchmove", draw_phone);
     canvas.addEventListener("touchout", stopDrawing);
 
     const clearButton = document.getElementById("clearButton");
