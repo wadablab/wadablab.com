@@ -98,6 +98,7 @@
 
     function resizeCanvas() {
         //resize canvas
+
         if(window.innerHeight >= (9*window.innerWidth/16)) {
             canvas.width  = window.innerWidth*0.5;
             canvas.height = Math.floor(9*canvas.width/16);
@@ -105,6 +106,10 @@
         else {
             canvas.height = window.innerHeight*0.5;
             canvas.width  = Math.floor(16*canvas.height/9);
+        }
+        if (window.innerWidth <= 800){
+            canvas.width  = window.innerWidth*0.95;
+            canvas.height = Math.floor(9*canvas.width/16);
         }
         context = canvas.getContext("2d");
         BB = canvas.getBoundingClientRect();
