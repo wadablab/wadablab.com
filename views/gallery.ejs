@@ -6,7 +6,7 @@
     <h1 id="h1">ART GALLERY</h1>
 
     <div class = "canvas">
-        <canvas id="myCanvas" width="500" height="500"></canvas>
+        <canvas id="myCanvas"></canvas>
         <button id="clearButton">Clear</button>
     </div>
     <form action="/gallery" method="POST" enctype="multipart/form-data">
@@ -41,9 +41,10 @@
 
 <script>
     const canvas = document.getElementById("myCanvas");
-    const context = canvas.getContext("2d");
-    const BB = canvas.getBoundingClientRect();
+    let context = canvas.getContext("2d");
+    let BB = canvas.getBoundingClientRect();
     let isDrawing = false;
+    resizeCanvas();
 
     function startDrawing(event) {
         event.preventDefault();
@@ -95,6 +96,25 @@
     }
 
 
+    function resizeCanvas() {
+        //resize canvas
+        if(window.innerHeight >= (9*window.innerWidth/16)) {
+            canvas.width  = window.innerWidth*0.5;
+            canvas.height = Math.floor(9*canvas.width/16);
+        }
+        else {
+            canvas.height = window.innerHeight*0.5;
+            canvas.width  = Math.floor(16*canvas.height/9);
+        }
+        context = canvas.getContext("2d");
+        BB = canvas.getBoundingClientRect();
+    }
+
+    window.onload = function () {
+        window.scrollTo(0, 0);
+        return;
+    }   
+
     canvas.addEventListener("mousedown", startDrawing);
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener("mouseup", stopDrawing);
@@ -104,6 +124,8 @@
     canvas.addEventListener("touchend", stopDrawing);
     canvas.addEventListener("touchmove", draw_phone);
     canvas.addEventListener("touchout", stopDrawing);
+
+    window.addEventListener("resize", resizeCanvas, false);
 
     const clearButton = document.getElementById("clearButton");
     const postButton = document.getElementById("postButton");

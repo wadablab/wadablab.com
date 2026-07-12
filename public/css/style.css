@@ -639,6 +639,7 @@ model-viewer{
 
 .gallery_elt img{
     border: 5px solid var(--cream);
+    width: 50%;
 }
 
 /*PORTFOLIO*/
