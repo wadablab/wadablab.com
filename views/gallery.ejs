@@ -3,7 +3,7 @@
 
 <div class = "gallery-1">
 
-    <h1>ART GALLERY</h1>
+    <h1 id="h1">ART GALLERY</h1>
 
     <div class = "canvas">
         <canvas id="myCanvas" width="700" height="400"></canvas>
@@ -51,8 +51,8 @@
     function draw(event) {
         if (!isDrawing) return;
         
-        const x = event.clientX - BB.left;
-        const y = event.clientY - BB.top ;
+        const x = event.pageX - BB.left;
+        const y = event.pageY - BB.top;
         context.lineTo(x, y);
         context.stroke();
     }
@@ -61,7 +61,7 @@
         context.beginPath();
     }
 
-    let cover_path = "";
+
 
     function upload() {
         
@@ -71,11 +71,10 @@
                 description: "where worms can feel at home"
              }   
             const title = document.getElementById("title");
-            cover_path = canvas.toDataURL("image/png");
+            const cover_path = canvas.toDataURL("image/png");
             context.clearRect(0, 0, canvas.width, canvas.height);
             const body = document.getElementById("cover_path");
             body.value = cover_path;
-            console.log(body.value);
 
         } catch(error) {
             console.log(error);
