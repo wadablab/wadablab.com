@@ -678,6 +678,19 @@ model-viewer{
     transition: 0.3s;
 }
 
+@media(max-width: 700px){
+    .gallery-1{
+        padding: 0px;
+    }
+    .gallery-2{
+        grid-template-columns: 1fr 1fr;
+    }
+    .gallery_elt img{
+        width: 94%;
+    }
+}
+
+
 /*PORTFOLIO*/
 
 .portfolio_cont{
