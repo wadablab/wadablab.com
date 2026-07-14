@@ -90,7 +90,7 @@ input[type=submit]{
 
 
 .header{
-    box-shadow: 0 5px 5px #00000050;
+    box-shadow: 0 6px 5px #00000050;
     position: sticky;
     top: 0px;
     z-index: 1;
@@ -124,7 +124,7 @@ input[type=submit]{
 
 .header__nav ul{
     list-style-type: none;
-    display: flex;
+    display: -webkit-inline-box;
     color: var(--cream);
     margin: 0;
     padding: 15px 0px;
@@ -134,9 +134,11 @@ input[type=submit]{
 
 .header__nav ul li{
     color: var(--cream);
+    
 }
 
 .header__nav ul li a{
+    position: relative;
     padding:15px;
     text-decoration: none;
 }
@@ -147,6 +149,32 @@ input[type=submit]{
     transition: 0.3s;
 }
 
+
+.dropdown{
+    display: none;
+    position: absolute;
+    padding-top: 15px;
+    background: var(--red);
+    z-index: -1;
+}
+
+.dropdown a{
+    display: block;
+    padding: 0px;
+    
+}
+
+.dropdown_head{
+    position: relative;
+    
+}
+
+.dropdown_head:hover .dropdown{
+    display: block;
+}
+
+
+
 .header__button{
     align-content: center;
     padding: 0rem 15px;
@@ -155,7 +183,7 @@ input[type=submit]{
 .header__button button{
     float: right;
     font-family: "Lexend",sans-serif;
-    padding:.2rem 2rem;
+    padding:.2rem 1rem;
     border-radius: 10px;
     border: solid 2px;
     border-color: transparent;
@@ -615,7 +643,7 @@ model-viewer{
 
 /*GALLERY*/
 .gallery-1{
-    padding: 0px;
+    padding: 20px;
 }
 
 .canvas{
@@ -627,19 +655,27 @@ model-viewer{
 }
 
 .gallery-2{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .gallery_elt{
     text-align: center;
-    padding: 2.5%
 }
 
 .gallery_elt img{
     border: 5px solid var(--cream);
-    width: 50%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 85%;
+    transition: 0.3s;
+}
+
+.gallery_elt img:hover{
+    width: 95%;
+    margin: 0%;
+    margin-bottom: 10%;
+    transition: 0.3s;
 }
 
 /*PORTFOLIO*/
