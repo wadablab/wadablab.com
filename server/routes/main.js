@@ -205,7 +205,7 @@ router.post('/gallery', async(req,res) =>{
                 
                 let newDrawing;
                 newDrawing = new Drawing({
-                    title: req.body.title,
+                    title: req.body.title ? req.body.title : "untitled",
                     cover_path: req.body.cover_path,
                     createdAt: Date.now(),
                 })
