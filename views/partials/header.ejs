@@ -5,22 +5,12 @@
     </a>
 </div>
 
-<header class="header">
+<header>
     
-    <nav class="header__nav">
-        <ul>
+    <nav  class="header">
+        <ul class="header__nav">
             <li>
-                <div class="dropdown_head">
-                    <a>Posts</a>
-                    <div class="dropdown">
-                        <a href="/">All</a>
-                        <a href="/blog-post">Blogposts</a>
-                        <a href="/mini-jam">Music</a>
-                        <a href="/video">Videos</a>
-                    </div>
-                </div>
-                
-                
+                <a class="dropdown_head">Posts</a>
             </li>
             <li>
                 <a href="/game">Games</a>
@@ -32,12 +22,23 @@
                 <a href="/gallery">Art Gallery</a>
             </li>
         </ul>
+        
+
+    
+    
+
+        <div class="header__button">
+            <button class="searchBtn" aria-expanded="false">
+                Search
+            </button>
+        </div>
     </nav>
 
-    <div class="header__button">
-        <button class="searchBtn" aria-expanded="false">
-            Search
-        </button>
-    </div>
-
+    <ul class="dropdown">
+        <li><a href="/">All</a></li>
+        <li><a href="/blog-post">Blogposts</a></li>
+        <li><a href="/mini-jam">Music</a></li>
+        <li><a href="/video">Videos</a></li>
+    </ul>
 </header>
+
