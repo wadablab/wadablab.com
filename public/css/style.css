@@ -198,14 +198,19 @@ header{
 
 
 
+header:has(.dropdown_head:hover) .header,
+header:has(.dropdown:hover) .header{
+    box-shadow: 0 6px 5px #00000000;
+    transition: .1s;
+}
 
 header:has(.dropdown_head:hover) .dropdown,
 header:has(.dropdown_head:active) .dropdown, 
 .dropdown:hover{
     position: absolute;
-    min-width: 200vw;
+    min-width: 100vw;
     display: flex;
-    transform: translateY(4rem);
+    transform: translateY(4.2rem);
     transition: 0.1s;
     left: -2rem;
     
@@ -215,6 +220,9 @@ header:has(.dropdown_head:active) .dropdown,
 
 
 @media(max-width: 700px){
+    header{
+        overflow: clip;
+    }
     .header{
         overflow-x: scroll;
         white-space: nowrap;
@@ -701,6 +709,10 @@ model-viewer{
 @media(max-width: 700px){
     .gallery-1{
         padding: 0px;
+    }
+    .canvas canvas{
+        box-sizing: border-box;
+        width : 100vw;
     }
     .gallery-2{
         grid-template-columns: 1fr 1fr;
