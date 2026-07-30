@@ -221,7 +221,7 @@ header:has(.dropdown_head:active) .dropdown,
 
 @media(max-width: 700px){
     header{
-        overflow: clip;
+        overflow-x: clip;
     }
     .header{
         overflow-x: scroll;
