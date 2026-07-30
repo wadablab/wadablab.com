@@ -44,6 +44,7 @@
     let context = canvas.getContext("2d");
     let BB = canvas.getBoundingClientRect();
     let isDrawing = false;
+    resizeCanvas();
 
     function startDrawing(event) {
         event.preventDefault();
@@ -128,7 +129,6 @@
     canvas.addEventListener("touchend", stopDrawing);
     canvas.addEventListener("touchmove", draw_phone);
     canvas.addEventListener("touchout", stopDrawing);
-
 
     const clearButton = document.getElementById("clearButton");
     const postButton = document.getElementById("postButton");
