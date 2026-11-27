@@ -172,6 +172,18 @@ header{
     transition: .3s;
 }
 
+.dropdown_2{
+    display: flex;
+    position: absolute;
+    min-width: 200vw;
+    top: -2rem;
+    left: -2rem;
+    background: var(--red);
+    z-index: -1;
+    box-shadow: 0 6px 5px #00000050;
+    transition: .3s;
+}
+
 .dropdown a{
     display: flex;
 }
@@ -216,7 +228,17 @@ header:has(.dropdown_head:active) .dropdown,
     
 }
 
-
+header:has(.dropdown_2_head:hover) .dropdown_2,
+header:has(.dropdown_2_head:active) .dropdown_2, 
+.dropdown_2:hover{
+    position: absolute;
+    min-width: 100vw;
+    display: flex;
+    transform: translateY(4.2rem);
+    transition: 0.1s;
+    left: -2rem;
+    
+}
 
 
 @media(max-width: 700px){
