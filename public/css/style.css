@@ -133,23 +133,23 @@ header{
     margin: 0;
     padding: 1rem 0px;
 }
-.dropdown{
+.dropdown, .dropdown_2{
     list-style-type: none;
     color: var(--cream);
 }
 
-.header ul li, .dropdown{
+.header ul li, .dropdown, .dropdown_2{
     color: var(--cream);
     
 }
 
-.header ul li a, .dropdown a{
+.header ul li a, .dropdown a, .dropdown_2 a{
     position: relative;
     padding:15px;
     text-decoration: none;
 }
 
-.header ul a:hover, .dropdown a:hover{
+.header ul a:hover, .dropdown a:hover, .dropdown_2 a:hover{
     background:var(--cream);
     color: var(--black);
     transition: 0.3s;
@@ -160,7 +160,7 @@ header{
     color: var(--black);
     transition: 0.3s;
 }
-.dropdown{
+.dropdown, .dropdown_2{
     display: flex;
     position: absolute;
     min-width: 200vw;
@@ -172,23 +172,11 @@ header{
     transition: .3s;
 }
 
-.dropdown_2{
-    display: flex;
-    position: absolute;
-    min-width: 200vw;
-    top: -2rem;
-    left: -2rem;
-    background: var(--red);
-    z-index: -1;
-    box-shadow: 0 6px 5px #00000050;
-    transition: .3s;
-}
-
-.dropdown a{
+.dropdown a, .dropdown_2 a{
     display: flex;
 }
 
-.dropdown_head{
+.dropdown_head, .dropdown_2_head{
     position: relative;
 }
 
@@ -211,7 +199,9 @@ header{
 
 
 header:has(.dropdown_head:hover) .header,
-header:has(.dropdown:hover) .header{
+header:has(.dropdown_2_head:hover) .header,
+header:has(.dropdown:hover) .header,
+header:has(.dropdown_2:hover) .header{
     box-shadow: 0 6px 5px #00000000;
     transition: .1s;
 }
